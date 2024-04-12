@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Job Listings</h1>
+        <div>
+            <select id="categorySelect" onchange="filterByCategory()">
+                <!-- <select id="category-list" (change)="onCategoryChange($event.target)"> -->
+                <option value="all">All Categories</option>
+                <!-- <option *ngFor="let category of categories" [value]="category"></option> -->
+            </select>
+        </div>
+        <ul class="job-list" id="itemList">
+            <!-- Job listings will be dynamically populated here -->
+        </ul>
+    </div>
+
+    <script>
+        var jobListings = {
+            "Team": [{
+                    "title": "ABC Developer",
+                    "company": "ABC Tech",
+                    "location": "Nana Varachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "TEAM"
+                },
+                {
+                    "title": "XYZ Developer",
+                    "company": "XYZ Solutions",
+                    "location": "Sahara darwaja",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "TEAM"
+                }
+            ],
+            "I.T.": [{
+                    "title": "Frontend Developer",
+                    "company": "ABC Tech",
+                    "location": "Nana Varachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "I.T."
+                },
+                {
+                    "title": "Backend Developer",
+                    "company": "XYZ Solutions",
+                    "location": "Sahara darwaja",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "I.T."
+                }
+            ],
+            "Sales": [{
+                    "title": "UI/UX Designer",
+                    "company": "Design Co.",
+                    "location": "Sarthana",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Sales"
+                },
+                {
+                    "title": "Data Scientist",
+                    "company": "Data Insights Inc.",
+                    "location": "Motavarachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Sales"
+                },
+                {
+                    "title": "Project Manager",
+                    "company": "Project Management Group",
+                    "location": "Puna gam",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Sales"
+                }
+            ],
+            "Marketing": [{
+                    "title": "UI/UX Designer",
+                    "company": "Design Co.",
+                    "location": "Sarthana",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Marketing"
+                },
+                {
+                    "title": "Data Scientist",
+                    "company": "Data Insights Inc.",
+                    "location": "Motavarachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Marketing"
+                }
+            ],
+            "Education": [{
+                    "title": "UI/UX Designer",
+                    "company": "Design Co.",
+                    "location": "Sarthana",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Education"
+                },
+                {
+                    "title": "Data Scientist",
+                    "company": "Data Insights Inc.",
+                    "location": "Motavarachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Education"
+                }
+            ],
+            "Finance": [{
+                    "title": "UI/UX Designer",
+                    "company": "Design Co.",
+                    "location": "Sarthana",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Finance"
+                },
+                {
+                    "title": "Data Scientist",
+                    "company": "Data Insights Inc.",
+                    "location": "Motavarachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Finance"
+                },
+                {
+                    "title": "Data Scientist",
+                    "company": "Data Insights Inc.",
+                    "location": "Motavarachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Finance"
+                }
+            ],
+            "Design": [{
+                    "title": "UI/UX Designer",
+                    "company": "Design Co.",
+                    "location": "Sarthana",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Design"
+                },
+                {
+                    "title": "Data Scientist",
+                    "company": "Data Insights Inc.",
+                    "location": "Motavarachha",
+                    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+                    "category": "Design"
+                }
+            ]
+
+        };
+        // Function to populate the select dropdown with categories
+        function populateCategorySelect() {
+            var select = document.getElementById("categorySelect");
+            for (var category in jobListings) {
+                if (jobListings.hasOwnProperty(category)) {
+                    var option = document.createElement("option");
+                    option.value = category;
+                    option.textContent = category;
+                    select.appendChild(option);
+                }
+            }
+        }
+
+        // Function to populate job listings based on the selected category
+        function filterByCategory() {
+            var selectedCategory = document.getElementById("categorySelect").value;
+            var itemList = document.getElementById("itemList");
+            itemList.innerHTML = ''; // Clear existing job listings
+
+            if (selectedCategory === "all") {
+                // If "All Categories" is selected, display all job listings
+                for (var category in jobListings) {
+                    if (jobListings.hasOwnProperty(category)) {
+                        jobListings[category].forEach(function (listing) {
+                            addItemToList(itemList, listing);
+                        });
+                    }
+                }
+            } else {
+                // Display job listings for the selected category
+                jobListings[selectedCategory].forEach(function (listing) {
+                    addItemToList(itemList, listing);
+                });
+            }
+        }
+
+        // Function to add a job listing item to the list
+        function addItemToList(itemList, listing) {
+            var li = document.createElement("li");
+            li.innerHTML = "<strong>Title:</strong> " + listing.title + "<br><strong>Company:</strong> " +
+                listing.company + "<br><strong>Location:</strong> " + listing.location +
+                "<br><strong>Description:</strong> " + listing.description + "<br><strong>Category:</strong> " + listing
+                .category;
+            itemList.appendChild(li);
+        }
+
+        // Populate the select dropdown initially
+        populateCategorySelect();
+    </script>
+</body>
+
+</html>

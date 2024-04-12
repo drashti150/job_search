@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 700px;
+    background-image: url(https://jobhunt.madrasthemes.com/wp-content/uploads/2018/09/home-bg.jpg);
+    /* opacity: 0.4; */
+    background-color: #ccc;
+  
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    /* background-color: #dad2d2; */
+    border-radius: 5px;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 250px;
+    font-size: 53px;
+    color: white;
+  }
+  
+  
+  p {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    color: white;
+  
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  select {
+    padding: 16px 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+  }
+  
+  input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }

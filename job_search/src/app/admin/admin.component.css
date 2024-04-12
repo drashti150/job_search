@@ -1,0 +1,191 @@
+/* Container styles */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 30px 0;
+  margin-left: 30%; */
+  border: 2px solid black;
+  width: 100%;
+  height: 60%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login {
+  border: 2px solid rgb(234, 228, 228);
+  text-align: justify;
+  width: 30%;
+  margin: 100px 0px;
+  margin-left: 35%;
+  border-radius: 10px;
+}
+
+/* Left panel styles */
+.left-panel {
+  /* flex: 1; */
+  padding: 50px;
+  border-right: 1px solid #ccc;
+}
+
+/* Right panel styles */
+.right-panel {
+  flex: 2;
+  padding: 10px;
+}
+
+/* Login form styles */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 40px;
+
+}
+
+input[type="username"],
+input[type="password"] {
+  width: 50%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+  margin: 30px;
+  /* margin-left: 40px; */
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Admin panel styles */
+.login h2,h1{
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h2 {
+  /* text-align: center; */
+  margin-bottom: 20px;
+  color: #333;
+  /* margin-left: 40%; */
+}
+ 
+.recruiter input[type="text"] {
+  width: 20%;
+  margin-left: 10px;
+  height: 30px;
+}
+
+.section-header {
+  font-size: 24px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+
+.left-panel h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.recruiter,
+.category {
+  margin-bottom: 20px;
+}
+
+.recruiter h2,
+.category h2,
+.job h2{
+  cursor: pointer;
+  color: #007bff;
+}
+
+/* Right panel styles */
+.right-panel {
+  flex: 2;
+  padding: 20px;
+}
+
+.recruiter_box {
+  margin-bottom: 20px;
+}
+
+.recruiter_box h2 {
+  margin-bottom: 10px;
+}
+
+.add-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin: 10px;
+  height: 35px;
+  width: 100px;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.recruiter-list,
+.category-list {
+  margin-top: 20px;
+}
+
+.recruiter-item,
+.category-item {
+  margin-bottom: 10px;
+}
+
+.recruiter-details,
+.category-details {
+  display: flex;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 20%;
+  padding: 8px;
+  margin: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

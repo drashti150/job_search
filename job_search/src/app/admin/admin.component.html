@@ -1,0 +1,162 @@
+<div *ngIf="!isLoggedIn">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="login">
+      <h2>Login</h2>
+
+      <div>
+        <label for="username">Username : </label>
+        <input type="username" formControlName="username">
+      </div>
+
+      <div>
+        <label for="password">Password : </label>
+        <input type="password" formControlName="password">
+      </div>
+
+      <button type="submit">Login</button>
+    </div>
+
+  </form>
+</div>
+
+
+<div *ngIf="isLoggedIn">
+
+  <h1>Welcome to Admin Panel</h1>
+
+  <div class="container">
+
+    <div class="left-panel">
+
+      <h1>Admin Panel</h1>
+
+      <div class="recruiter" *ngIf="isLoggedIn">
+        <h2 (click)="toggleRecruiters()">Recruiter List</h2>
+      </div>
+
+      <div class="category" *ngIf="isLoggedIn">
+        <h2 (click)="toggleCategories()">Category List</h2>
+      </div>
+
+      <div class="job" *ngIf="isLoggedIn">
+        <h2 (click)="toggleJobList()">Job Postings</h2>
+      </div>
+    </div>
+
+
+
+    <!-- right panel -->
+    <div class="right-panel">
+
+      <div class="recruiter_box">
+        <div class="recruiter_box" *ngIf="showRecruitersPanel">
+
+          <div class="recruiter">
+            <h1>Recruiter List</h1>
+
+            <h2>Add Recruiter List</h2>
+
+            <input type="text" placeholder="Enter recruiter name" [(ngModel)]="recruiterName">
+            <input type="text" placeholder="Enter recruiter email" [(ngModel)]="recruiterEmail">
+            <input type="text" placeholder="Enter recruiter category" [(ngModel)]="recruiterCategory">
+            <button (click)="addRecruiter()" class="add-button">ADD</button>
+
+            <h2>Recruiters List</h2>
+
+            <div *ngIf="recruiters.length === 0">
+              <p>No recruiters found.</p>
+            </div>
+
+          </div>
+
+          <!-- show recruter list -->
+          <div class="recruiter-list">
+
+            <div *ngFor="let recruiter of recruiters; let i = index" class="recruiter-item">
+              <div class="recruiter-details">
+                <input type="text" [(ngModel)]="recruiter.name" placeholder="Enter name"
+                  [disabled]="editingIndex !== i">
+
+                <input type="email" [(ngModel)]="recruiter.email" placeholder="Enter email"
+                  [disabled]="editingIndex !== i">
+
+                <input type="text" [(ngModel)]="recruiter.category" placeholder="Enter category"
+                  [disabled]="editingIndex !== i">
+
+                <button (click)="updateRecruiter()" *ngIf="editingIndex === i">Update</button>
+                <button (click)="editRecruiter(i)" *ngIf="editingIndex !== i">Edit</button>
+                <button (click)="deleteRecruiter(i)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- category -->
+      <!-- <div class="recruiter_box"> -->
+      <div class="recruiter_box" *ngIf="showCategoriesPanel">
+        <div class="categories">
+
+          <!-- <div class="categories" *ngIf="showCategoriesPanel"> -->
+          <h1>Category wise Job List</h1>
+
+          <h2>Add Category</h2>
+
+          <input type="text" placeholder="Enter category name" [(ngModel)]="categoryName">
+          <button (click)="addCategory()" class="add-button">ADD</button>
+
+          <!-- show category list  -->
+          <div class="category-list">
+
+            <h2 class="section-header">All categories</h2>
+            <select id="category-list" (change)="filterByCategory()">
+              <option value="all">All Categories</option>
+              <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- 
+                    <h2>Categories List</h2>
+
+                    <div *ngIf="categories.length === 0">
+                    <p>No categories found.</p>
+                    </div>
+
+                    <div *ngFor="let category of categories; let i = index" class="category-item">
+
+                    <div class="category-details">
+                        <p>{{ category.name }}</p>
+                        <button (click)="editCategory(i)">Edit</button>
+                        <button (click)="deleteCategory(i)">Delete</button>
+                    </div> -->
+
+      <!-- </div>  -->
+
+
+      <!-- job post -->
+       
+<div>
+  <div>
+    <div class="job-list" *ngIf="showJobList">
+      <h2>Job Postings</h2>
+      <div *ngIf="jobPosts.length === 0">
+        <p>No job postings found.</p>
+      </div>
+      
+      <div *ngFor="let jobPost of jobPosts; let i = index" (click)="toggleRightPanel()">
+        <div class="job-item">
+          <h3 class="job-title">{{ jobPost.title }}</h3>
+          <p class="job-company">Company: {{ jobPost.company }}</p>
+          <p class="job-location">Location: {{ jobPost.location }}</p>
+          <p class="job-description">{{ jobPost.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+</div>
+
+   

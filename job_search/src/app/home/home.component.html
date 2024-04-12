@@ -1,0 +1,28 @@
+<body>
+    <div class="container">
+  
+      <h1>The Easiest Way to Get Your New Job</h1>
+      <p>Find Jobs, Employment & Career Opportunities</p>
+  
+      <form action="#" method="GET">
+        <input type="text" name="keywords" placeholder="Keywords">
+  
+        <!-- View Counrty by Dynamic -->
+        <select id="country-list" (change)="onCategoryChange($event.target)">
+          <option value="all">All Categories</option>
+          <option *ngFor="let country of countrys" [value]="country">{{ country }}</option>
+        </select>
+  
+        <!-- View Category by dyanmic -->
+        <!-- <h2>All categories</h2> -->
+        <select id="category-list" (change)="onCategoryChange($event.target)">
+          <option value="all">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+  
+        <input type="submit" value="SEARCH">
+  
+      </form>
+    </div>
+  </body>
+  
