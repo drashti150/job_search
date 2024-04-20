@@ -1,0 +1,50 @@
+.job-list {
+  list-style-type: none;
+  padding: 0;
+  
+}
+
+.job-container {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+h1{
+  text-align: center;
+  font-size: 56px;
+  color: rgb(38, 38, 249);
+}
+
+.job-container:hover {
+  background-color: #f0f0f0;
+}
+
+.job-container h2 {
+  margin-top: 0;
+}
+
+.apply-button,
+.applied-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.apply-button:hover,
+.applied-button:hover {
+  background-color: #0056b3;
+}
+
+.applied-button:disabled {
+  background-color: #05aa23;
+  cursor: not-allowed;
+}
+
+.job-container p {
+  margin: 5px 0;
+}

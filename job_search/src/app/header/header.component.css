@@ -1,5 +1,3 @@
-/* Common styles for header and navigation */
-
 body {
   margin: 0;
   padding: 0;
@@ -99,21 +97,22 @@ nav ul li a:hover {
   opacity: 1;
 }
 
-
-.post_a_job a {
-  font-weight: 400;
+.post-job-btn {
+  background-color: rgb(77, 61, 225);
   font-size: 18px;
-  color: white;
+  color: #4a4b4b;
   box-sizing: border-box;
   display: inline-block;
-  position: relative;
-  flex: right;
+  transform: translateY(-50%);
   width: auto;
   max-width: none;
-  padding: 0;
-  text-decoration: none;
-  margin-right: auto; 
-  
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  right: 20px;
+  position: absolute;
+  margin: -20px 15px;
+  color: #ffffff;
 }
 
 @media all and (max-width: 600px) {

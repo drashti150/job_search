@@ -189,3 +189,38 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+.job-list {
+  list-style: none;
+  padding: 0;
+}
+
+.job-list li {
+  display: inline-block;
+  margin-right: 20px; 
+  vertical-align: top;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .login {
+    width: 30%; 
+    margin: 20px;
+  }
+
+  .right-panel {
+    flex: 1;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .login {
+    width: 90%; 
+  }
+}

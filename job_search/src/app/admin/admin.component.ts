@@ -16,6 +16,10 @@ export class AdminComponent {
   showRightPanel: boolean = false;
   selectedJobIndex: number | null = null;
   showJobList: boolean = false;
+  jobs: any;
+  category: any;
+  countryName: any;
+  companyName: any;
 
   constructor(private formBuilder: FormBuilder) {
 
@@ -148,53 +152,58 @@ export class AdminComponent {
 
 
   // category
+// 
+  // categoryName: string = '';
+  // editingCategoryIndex: number | null = null;
 
-  categoryName: string = '';
-  categories: { name: string }[] = [];
-  editingCategoryIndex: number | null = null;
+  // addCategory() {
+  //   if (this.categoryName.trim() !== '') {
+  //     this.categories.push({ name: this.categoryName });
 
-  addCategory() {
-    if (this.categoryName.trim() !== '') {
-      this.categories.push({ name: this.categoryName });
+  //     this.storeData();
 
-      this.storeData();
+  //     this.resetCategoryFields();
+  //   }
+  // }
 
-      this.resetCategoryFields();
-    }
-  }
+  // editCategory(index: number) {
+  //   this.editingCategoryIndex = index;
+  //   this.categoryName = this.categories[index].name;
+  // }
 
-  editCategory(index: number) {
-    this.editingCategoryIndex = index;
-    this.categoryName = this.categories[index].name;
-  }
+  // updateCategory() {
+  //   if (this.editingCategoryIndex !== null) {
+  //     this.categories[this.editingCategoryIndex].name = this.categoryName;
 
-  updateCategory() {
-    if (this.editingCategoryIndex !== null) {
-      this.categories[this.editingCategoryIndex].name = this.categoryName;
+  //     this.storeData();
 
-      this.storeData();
-
-      this.resetCategoryFields();
-    }
-  }
+  //     this.resetCategoryFields();
+  //   }
+  // }
 
   deleteCategory(index: number) {
     this.categories.splice(index, 1);
 
     this.storeData();
 
-    this.resetCategoryFields();
+    // this.resetCategoryFields();
   }
 
-  resetCategoryFields() {
-    this.categoryName = '';
-    this.editingCategoryIndex = null;
-  }
+  // resetCategoryFields() {
+  //   this.categoryName = '';
+  //   this.editingCategoryIndex = null;
+  // }
 
   retrieveData() {
+
     const storedRecruiters = localStorage.getItem('recruiters');
     if (storedRecruiters) {
       this.recruiters = JSON.parse(storedRecruiters);
+    }
+
+    const storedCountries = localStorage.getItem('countries');
+    if (storedCountries) {
+      this.countries = JSON.parse(storedCountries);
     }
 
     const storedCategories = localStorage.getItem('categories');
@@ -202,9 +211,9 @@ export class AdminComponent {
       this.categories = JSON.parse(storedCategories);
     }
 
-    const storedJobPosts = localStorage.getItem('jobPosts');
-    if (storedJobPosts) {
-      this.jobPosts = JSON.parse(storedJobPosts);
+    const storedJobs = localStorage.getItem('jobPosts');
+    if (storedJobs) {
+      this.jobs = JSON.parse(storedJobs);
     }
   }
 
@@ -221,22 +230,128 @@ export class AdminComponent {
     }
   }
 
-  // job post
+
+  // for job
+  // jobs: any[] = [];
+  // category: string = '';
+  // companyName: string = '';
+  // location: string = '';
+  // description: string = '';
+  // countryName: any;
+  // country: any;
+
+  // addJob() {
+  //   if (this.category && this.countryName && this.companyName && this.location && this.description) {
+  //     // Add new job to the list
+  //     this.jobs.push({
+  //       category:this.category,
+  //       country : this.countryName,
+  //       company: this.companyName,
+  //       location: this.location,
+  //       description: this.description,
+
+  //     });
+
+  //     // Save updated job list to local storage
+  //     localStorage.setItem('jobs', JSON.stringify(this.jobs));
+
+  //     // Clear input fields after adding job
+  //     this.category = '';
+  //     this.countryName = '';
+  //     this.companyName = '';
+  //     this.location = '';
+  //     this.description = '';
+
+  //   }
+  // }
+  // // job post
+   categories = [
+    "Flutter",
+    "Web developer",
+    "Web design",
+    "Marketing",
+    "UI/UX Designer",
+  ];
+ 
+  countries = [
+    "India",
+    "Jaipur",
+    "Kolkata",
+    "Bangalore",
+    "Mumbai",
+
+  ];
+
   jobPosts: any[] = [{
-    title: 'Job Title 1', 
-    company: 'Company A', 
-    location: 'Location X', 
-    description: 'Description of job 1',
+    "title": 'UI/UX Designer',
+    "company": 'Company A',
+    "location": 'Location X',
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "country": 'India',
+    "category": 'UI/UX Designer'
+  },
+  {
+    "title": "UI/UX Designer",
+    "company": "Design Co.",
+    "location": "Sarthana",
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "category": "UI/UX Designer",
+    "country": 'India'
 
   },
   {
-    title: 'Job Title 1', company: 'Company A', location: 'Location X', description: 'Description of job 1',
+    "title": "Flutter",
+    "company": "Data Insights Inc.",
+    "location": "Motavarachha",
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "category": "Flutter",
+    "country": 'India'
 
   },
   {
-    title: 'Job Title 1', company: 'Company A', location: 'Location X', description: 'Description of job 1',
+    "title": "Flutter",
+    "company": "Data Insights Inc.",
+    "location": "Motavarachha",
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "category": "Flutter",
+    "country": 'Mumbai'
 
   },
+  {
+    "title": "Flutter",
+    "company": "Data Insights Inc.",
+    "location": "Motavarachha",
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "category": "Flutter",
+    "country": 'Kolkata'
+
+  },
+  {
+    "title": 'Web design',
+     "company": 'xyz', 
+    "location": 'Adajan', 
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "country": 'Bangalore',
+    "category": 'Web design',
+
+  },
+  {
+    "title": 'Web developer',
+    "company": 'abc', 
+   "location": 'LalDarwaja', 
+   "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+   "country": 'Kolkata',
+   "category": 'Web developer',
+  },
+  {
+    "title": 'Web developer',
+    "company": 'abcd', 
+   "location": 'Varachha', 
+   "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+   "country": 'Mumbai',
+   "category": 'Web developer',
+  }
+ 
   ];
 
 
@@ -245,12 +360,12 @@ export class AdminComponent {
     this.storeData();
   }
 
-  // retrieveJobPosts() {
-  //   const storedJobPosts = localStorage.getItem('jobPosts');
-  //   if (storedJobPosts) {
-  //     this.jobPosts = JSON.parse(storedJobPosts);
-  //   }
-  // }
+  retrieveJobPosts() {
+    const storedJobPosts = localStorage.getItem('jobPosts');
+    if (storedJobPosts) {
+      this.jobPosts = JSON.parse(storedJobPosts);
+    }
+  }
 
   toggleJobList(): void {
     if (this.showRightPanel) {
@@ -260,8 +375,15 @@ export class AdminComponent {
     this.showJobList = !this.showJobList;
   }
 
+  deleteJob(index: number) {
+    this.jobPosts.splice(index, 1);
+  
+    this.storeData();
+  }
+  
   storeData() {
     localStorage.setItem('recruiters', JSON.stringify(this.recruiters));
+    localStorage.setItem('countries', JSON.stringify(this.countries));
     localStorage.setItem('categories', JSON.stringify(this.categories));
     localStorage.setItem('jobPosts', JSON.stringify(this.jobPosts));
   }

@@ -1,56 +1,94 @@
-<div class="container">
-  <h1>Job Application Form</h1>
-  <form [formGroup]="jobApplicationForm" (ngSubmit)="onSubmit()">
-    
-    <div class="form-group">
-      <label for="exampleInputName">Full Name</label>
-      <input type="text" formControlName="fullname" class="form-control" id="exampleInputName" placeholder="Enter your name and surname" required>
-      <small class="text-danger" *ngIf="jobApplicationForm.get('fullname').errors?.required && (jobApplicationForm.get('fullname').touched || jobApplicationForm.get('fullname').dirty)">
-        Full name is required.
-      </small>
-    </div>
-    
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email address">
-      <small class="text-danger" *ngIf="jobApplicationForm.get('email').errors?.required && (jobApplicationForm.get('email').touched || jobApplicationForm.get('email').dirty)">
-        Email is required.
-      </small>
-      <small class="text-danger" *ngIf="jobApplicationForm.get('email').errors?.email && (jobApplicationForm.get('email').touched || jobApplicationForm.get('email').dirty)">
-        Invalid email format.
-      </small>
-    </div>
-    
-    <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" formControlName="address" class="form-control" id="inputAddress" placeholder="Enter your address">
-    </div>
-    
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" formControlName="city" class="form-control" id="inputCity" placeholder="Enter your city">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputZip">Zip</label>
-        <input type="text" formControlName="zip" class="form-control" id="inputZip" placeholder="Enter your ZIP code">
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <label for="example-tel-input">Telephone</label>
-      <input class="form-control" formControlName="tel" type="tel" id="example-tel-input" placeholder="Enter your telephone number">
-    </div>
-    
-    <div class="form-group">
-      <label for="example-date-input">Start Date</label>
-      <input class="form-control" formControlName="date" type="date" id="example-date-input">
-    </div>
-    
-    <div class="form-group mt-3">
-      <label>Upload your CV:</label>
-      <input type="file" formControlName="file">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+<div *ngIf="isLoggedIn; else loginFormTemplate">
+  <!-- Display job application form -->
+  <ng-container *ngTemplateOutlet="jobAppForm"></ng-container>
+  <!-- Add logout button -->
+  <button (click)="logout()">Logout</button>
 </div>
+ 
+  <ng-template #loginFormTemplate>
+    <!-- Display login form -->
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      
+      <label for="username">Username:</label>
+      <input type="username" id="username" formControlName="username">
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password">
+      
+      <button type="submit">Login</button>
+    
+    </form>
+  </ng-template>
+  
+  <ng-template #jobAppForm>
+
+    <div>
+      <h2>Job Application Form</h2>
+      <form [formGroup]="jobApplicationForm" (ngSubmit)="onSubmit()">
+        <!-- Full Name -->
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" formControlName="fullname">
+        
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email">
+        
+        <!-- Phone -->
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" formControlName="phone">
+        
+        <!-- Address -->
+        <label for="address">Address:</label>
+        <input type="text" id="address" formControlName="address">
+        
+        <!-- City, State, Zip Code -->
+        <div style="display: flex; gap: 10px;">
+          <div style="flex: 1;">
+            <label for="city">City:</label>
+            <input type="text" id="city" formControlName="city">
+          </div>
+          <div style="flex: 1;">
+            <label for="state">State:</label>
+            <input type="text" id="state" formControlName="state">
+          </div>
+          <div style="flex: 1;">
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" formControlName="zip">
+          </div>
+        </div>
+        
+        <!-- Upload Resume -->
+        <label for="resume">Upload Resume:</label>
+        <input type="file" id="resume" formControlName="resume">
+        
+        <!-- Cover Letter -->
+        <label for="message">Cover Letter:</label>
+        <textarea id="message" formControlName="message"></textarea>
+        
+        <!-- Position Applied For -->
+        <label for="position">Applying for Position:</label>
+        <input type="text" id="position" formControlName="position">
+        
+        <!-- Desired Salary -->
+        <label for="salary">Desired Salary:</label>
+        <input type="text" id="salary" formControlName="salary">
+        
+        <!-- Personal Website -->
+        <label for="website">Personal Website (if any):</label>
+        <input type="text" id="website" formControlName="website">
+        
+        <!-- LinkedIn Profile -->
+        <label for="linkedin">LinkedIn Profile:</label>
+        <input type="text" id="linkedin" formControlName="linkedin">
+        
+        <!-- Skills -->
+        <label for="skills">Skills:</label>
+        <textarea id="skills" formControlName="skills" placeholder="Enter your skills (comma-separated)"></textarea>
+        
+        <!-- Submit Button -->
+        <input type="submit" value="Submit Application" [disabled]="!jobApplicationForm.valid">
+      </form>
+    </div>
+  </ng-template>
+  

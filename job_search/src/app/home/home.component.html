@@ -1,28 +1,40 @@
 <body>
-    <div class="container">
-  
-      <h1>The Easiest Way to Get Your New Job</h1>
-      <p>Find Jobs, Employment & Career Opportunities</p>
-  
-      <form action="#" method="GET">
-        <input type="text" name="keywords" placeholder="Keywords">
-  
-        <!-- View Counrty by Dynamic -->
-        <select id="country-list" (change)="onCategoryChange($event.target)">
-          <option value="all">All Categories</option>
-          <option *ngFor="let country of countrys" [value]="country">{{ country }}</option>
-        </select>
-  
-        <!-- View Category by dyanmic -->
-        <!-- <h2>All categories</h2> -->
-        <select id="category-list" (change)="onCategoryChange($event.target)">
-          <option value="all">All Categories</option>
-          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-        </select>
-  
-        <input type="submit" value="SEARCH">
-  
-      </form>
+  <div class="container">
+    <h1>The Easiest Way to Get Your New Job</h1>
+    <p>Find Jobs, Employment & Career Opportunities</p>
+
+    <form (submit)="filterJobPosts()">
+      <!-- <input type="text" name="keywords" placeholder="Keywords"> -->
+
+      <select id="country-list" name="country" [(ngModel)]="selectedCountry">
+        <option value="all">All Country</option>
+        <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+      </select>
+
+      <select id="category-list" name="category" [(ngModel)]="selectedCategory">
+        <option value="all">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+
+      <input type="submit" value="SEARCH">
+    </form>
+  </div>
+</body>
+<!-- Display filtered job posts here -->
+<div class="job-list">
+  <h1>Job List</h1>
+
+  <div class="job-post" *ngFor="let job of filteredJobPosts">
+    <h2>{{ job.title }}</h2>
+    <div class="job">
+      <p>Category : {{job.category}}</p>
+      <p>Country : {{job.country}}</p>
+      <p>Company : {{job.company}}</p>
+      <p>Location : {{job.location}}</p>
+      <p>Description : {{job.description}}</p>
+      </div>
+      <button class="apply-button" *ngIf="!job.applied" (click)="applyForJob(job)">Apply Now</button>
+      <button class="applied-button" *ngIf="job.applied" disabled> Applied</button>
     </div>
-  </body>
-  
+  </div>
+

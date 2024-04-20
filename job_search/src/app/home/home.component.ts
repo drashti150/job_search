@@ -1,31 +1,83 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  onCategoryChange(arg0: EventTarget|null) {
-    throw new Error('Method not implemented.');
+
+export class HomeComponent implements OnInit {
+  selectedCountry: string = 'all';
+  selectedCategory: string = 'all';
+  jobPosts: any[] = [];
+  filteredJobPosts: any[] = [];
+  recruiters: any;
+  categories: any;
+  countries: any;
+  // categories = [
+  //   "Flutter",
+  //   "Web developer",
+  //   "Web design",
+  //   "UI/UX Designer"
+  // ];
+ 
+  // countries = [
+  //   "India",
+  //   "Jaipur",
+  //   "Kolkata",
+  //   "Bangalore",
+  //   "mumbai"
+
+  // ];
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.retrieveJobPostsFromLocalStorage();
+  }
+
+  retrieveJobPostsFromLocalStorage(): void {
+    const storedJobPosts = localStorage.getItem('jobPosts');
+    if (storedJobPosts) {
+      this.jobPosts = JSON.parse(storedJobPosts);
+    }
+  
+    const storedRecruiters = localStorage.getItem('recruiters');
+    if (storedRecruiters) {
+      this.recruiters = JSON.parse(storedRecruiters);
+    }
+
+    const storedCountries = localStorage.getItem('countries');
+    if (storedCountries) {
+      this.countries = JSON.parse(storedCountries);
+    }
+
+    const storedCategories = localStorage.getItem('categories');
+    if (storedCategories) {
+      this.categories = JSON.parse(storedCategories);
     }
     
-      categories = [
-        "IT",
-        "Sales",
-        "Marketing",
-        "Finance",
-        "Design"
-      ];
-    
-    
-      countrys = [
-        "India",
-        "Mumbai",
-        "Kolkata",
-        "Bangaluru",
-        "Chennai",
-        "Jaipur"
-      ]
-            
+  }
+
+  filterJobPosts(): void {
+    this.filteredJobPosts = [...this.jobPosts];
+
+    if (this.selectedCountry !== 'all') {
+      this.filteredJobPosts = this.filteredJobPosts.filter(job => job.country === this.selectedCountry);
+    }
+
+    if (this.selectedCategory !== 'all') {
+      this.filteredJobPosts = this.filteredJobPosts.filter(job => job.category === this.selectedCategory);
+    }
+ 
+  }
+
+  applyForJob(job: any): void {
+    console.log('Applying for job: ', job.category);
+    job.applied = true;
+
+    localStorage.setItem('jobPosts', JSON.stringify(this.jobPosts));
+  }
+  
 }

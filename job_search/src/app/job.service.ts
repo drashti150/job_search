@@ -4,6 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class JobService {
+  applyForJob(id: any) {
+    throw new Error('Method not implemented.');
+  }
+  getUserAppliedJobs() {
+    throw new Error('Method not implemented.');
+  }
+  getJobs() {
+    throw new Error('Method not implemented.');
+  }
   
   isLoggedIn = false;
 
