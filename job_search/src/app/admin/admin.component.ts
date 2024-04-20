@@ -152,7 +152,7 @@ export class AdminComponent {
 
 
   // category
-// 
+  // 
   // categoryName: string = '';
   // editingCategoryIndex: number | null = null;
 
@@ -265,14 +265,14 @@ export class AdminComponent {
   //   }
   // }
   // // job post
-   categories = [
+  categories = [
     "Flutter",
     "Web developer",
     "Web design",
     "Marketing",
     "UI/UX Designer",
   ];
- 
+
   countries = [
     "India",
     "Jaipur",
@@ -298,6 +298,29 @@ export class AdminComponent {
     "category": "UI/UX Designer",
     "country": 'India'
 
+  }, {
+    "title": 'UI/UX Designer',
+    "company": 'Company A',
+    "location": 'Location X',
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "country": 'India',
+    "category": 'UI/UX Designer'
+  },
+  {
+    "title": 'UI/UX Designer',
+    "company": 'Company A',
+    "location": 'Location X',
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "country": 'India',
+    "category": 'UI/UX Designer'
+  },
+  {
+    "title": 'UI/UX Designer',
+    "company": 'Company A',
+    "location": 'Location X',
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "country": 'India',
+    "category": 'UI/UX Designer'
   },
   {
     "title": "Flutter",
@@ -328,8 +351,8 @@ export class AdminComponent {
   },
   {
     "title": 'Web design',
-     "company": 'xyz', 
-    "location": 'Adajan', 
+    "company": 'xyz',
+    "location": 'Adajan',
     "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
     "country": 'Bangalore',
     "category": 'Web design',
@@ -337,21 +360,21 @@ export class AdminComponent {
   },
   {
     "title": 'Web developer',
-    "company": 'abc', 
-   "location": 'LalDarwaja', 
-   "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-   "country": 'Kolkata',
-   "category": 'Web developer',
+    "company": 'abc',
+    "location": 'LalDarwaja',
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "country": 'Kolkata',
+    "category": 'Web developer',
   },
   {
     "title": 'Web developer',
-    "company": 'abcd', 
-   "location": 'Varachha', 
-   "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-   "country": 'Mumbai',
-   "category": 'Web developer',
+    "company": 'abcd',
+    "location": 'Varachha',
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+    "country": 'Mumbai',
+    "category": 'Web developer',
   }
- 
+
   ];
 
 
@@ -377,10 +400,10 @@ export class AdminComponent {
 
   deleteJob(index: number) {
     this.jobPosts.splice(index, 1);
-  
+
     this.storeData();
   }
-  
+
   storeData() {
     localStorage.setItem('recruiters', JSON.stringify(this.recruiters));
     localStorage.setItem('countries', JSON.stringify(this.countries));

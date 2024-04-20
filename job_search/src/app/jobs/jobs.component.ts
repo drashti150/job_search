@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobsComponent implements OnInit {
 
+  jobApplications: { [key: number]: number[] } = {}; 
   jobs: any[] = [];
   category: string = '';
   companyName: string = '';
@@ -26,7 +27,6 @@ export class JobsComponent implements OnInit {
   }
   addJob() {
     if (this.category && this.companyName && this.location && this.description) {
-
       this.jobs.push({
         category: this.category,
         country: this.country,
@@ -38,25 +38,51 @@ export class JobsComponent implements OnInit {
       // Save updated job list to local storage
       localStorage.setItem('jobPosts', JSON.stringify(this.jobs));
       this.retrieveData();
-
     }
   }
-  retrieveData() {
 
+  retrieveData() {
     const storedJobs = localStorage.getItem('jobPosts');
     if (storedJobs) {
       this.jobs = JSON.parse(storedJobs);
     }
   }
 
+  
   applyForJob(job: any): void {
-    console.log('Applying for job: ', job.category);
-    job.applied = true;
-    this.updateLocalStorage(); // Update local storage after applying for the job
+    const storedLoginDetails = localStorage.getItem('loginDetails');
+    if (storedLoginDetails) {
+      const { userId } = JSON.parse(storedLoginDetails);
+      console.log('User ID:', userId);
 
+      // Check if jobApplications object already contains the key for this job ID
+      if (this.jobApplications[job.id]) {
+        // If the job ID exists, push the user ID to the array
+        this.jobApplications[job.id].push(userId);
+      } else {
+        // If the job ID does not exist, create a new array with the user ID
+        this.jobApplications[job.id] = [userId];
+      }
+
+      job.applied = true;
+      this.updateLocalStorage(); // Update local storage after applying for the job
+    } else {
+      console.log('User is not logged in.');
+    }
   }
 
-  updateLocalStorage(): void{
-  localStorage.setItem('jobPosts', JSON.stringify(this.jobs));
+  updateLocalStorage(): void {
+    localStorage.setItem('jobPosts', JSON.stringify(this.jobs));
+    localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
   }
+
 }
+
+
+
+
+
+
+
+
+
