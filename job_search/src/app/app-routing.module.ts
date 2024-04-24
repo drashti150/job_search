@@ -7,6 +7,7 @@ import { ResumesComponent } from './resumes/resumes.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { AdminComponent } from './admin/admin.component';
 import { JobService } from './job.service';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/admin', pathMatch: 'full' },
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'about-us', component: AboutusComponent },
   { path: 'jobs', component: JobsComponent },
   { path: 'employers', component: EmployeeComponent },
+  { path: 'login', component: LoginComponent },
+
 
 ];
 

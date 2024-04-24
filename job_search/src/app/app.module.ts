@@ -14,6 +14,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClient } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HttpClient } from '@angular/common/http';
     JobsComponent,
     AboutusComponent,
     FooterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
