@@ -15,21 +15,6 @@ export class HomeComponent implements OnInit {
   recruiters: any;
   categories: any;
   countries: any;
-  // categories = [
-  //   "Flutter",
-  //   "Web developer",
-  //   "Web design",
-  //   "UI/UX Designer"
-  // ];
- 
-  // countries = [
-  //   "India",
-  //   "Jaipur",
-  //   "Kolkata",
-  //   "Bangalore",
-  //   "mumbai"
-
-  // ];
 
   constructor() { }
 
@@ -38,11 +23,12 @@ export class HomeComponent implements OnInit {
   }
 
   retrieveJobPostsFromLocalStorage(): void {
+
     const storedJobPosts = localStorage.getItem('jobPosts');
     if (storedJobPosts) {
       this.jobPosts = JSON.parse(storedJobPosts);
     }
-  
+
     const storedRecruiters = localStorage.getItem('recruiters');
     if (storedRecruiters) {
       this.recruiters = JSON.parse(storedRecruiters);
@@ -57,7 +43,7 @@ export class HomeComponent implements OnInit {
     if (storedCategories) {
       this.categories = JSON.parse(storedCategories);
     }
-    
+
   }
 
   filterJobPosts(): void {
@@ -70,7 +56,7 @@ export class HomeComponent implements OnInit {
     if (this.selectedCategory !== 'all') {
       this.filteredJobPosts = this.filteredJobPosts.filter(job => job.category === this.selectedCategory);
     }
- 
+
   }
 
   applyForJob(job: any): void {
@@ -79,5 +65,5 @@ export class HomeComponent implements OnInit {
 
     localStorage.setItem('jobPosts', JSON.stringify(this.jobPosts));
   }
-  
+
 }

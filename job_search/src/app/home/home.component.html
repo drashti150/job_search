@@ -4,7 +4,6 @@
     <p>Find Jobs, Employment & Career Opportunities</p>
 
     <form (submit)="filterJobPosts()">
-      <!-- <input type="text" name="keywords" placeholder="Keywords"> -->
 
       <select id="country-list" name="country" [(ngModel)]="selectedCountry">
         <option value="all">All Country</option>
@@ -20,21 +19,25 @@
     </form>
   </div>
 </body>
+
 <!-- Display filtered job posts here -->
 <div class="job-list">
   <h1>Job List</h1>
 
   <div class="job-post" *ngFor="let job of filteredJobPosts">
+
     <h2>{{ job.title }}</h2>
+
     <div class="job">
       <p>Category : {{job.category}}</p>
       <p>Country : {{job.country}}</p>
       <p>Company : {{job.company}}</p>
       <p>Location : {{job.location}}</p>
       <p>Description : {{job.description}}</p>
-      </div>
-      <button class="apply-button" *ngIf="!job.applied" (click)="applyForJob(job)">Apply Now</button>
-      <button class="applied-button" *ngIf="job.applied" disabled> Applied</button>
     </div>
-  </div>
 
+    <button class="apply-button" *ngIf="!job.applied" (click)="applyForJob(job)">Apply Now</button>
+    <button class="applied-button" *ngIf="job.applied" disabled> Applied</button>
+
+  </div>
+</div>

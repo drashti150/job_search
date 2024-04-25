@@ -9,56 +9,13 @@ import { Router } from '@angular/router';
 })
 export class ResumesComponent {
 
-  
-//   jobApplicationForm: FormGroup;
-
-//   constructor(private fb: FormBuilder, private router: Router) {
-//     this.jobApplicationForm = this.fb.group({
-//       fullname: ['', Validators.required],
-//       email: ['', [Validators.required, Validators.email]],
-//       phone: ['', Validators.required],
-//       address: ['', Validators.required],
-//       city: ['', Validators.required],
-//       state: ['', Validators.required],
-//       zip: ['', Validators.required],
-//       resume: ['', Validators.required],
-//       message: [''],
-//       linkedin: [''],
-//       skills: [''],
-//       salary: [''],
-//       position: [''],
-     
-//     });
-//   }
-
-//   saveFormData() {
-//     const formData = this.jobApplicationForm.value;
-//     localStorage.setItem('jobApplicationData', JSON.stringify(formData));
-//   }
-
-//   onSubmit() {
-//     if (this.jobApplicationForm.valid) {
-//       this.saveFormData();
-//       alert('Form data saved locally!');
-//       this.jobApplicationForm.reset();
-//       this.router.navigate(['/login']); 
-//     } else {
-//       alert('Please fill in all required fields.');
-//     }
-//   }
-
-//   logout() {
-//     localStorage.removeItem('loginDetails');
-//     // this.router.navigate(['/login']);
-//   }
-// }
   isLoggedIn = false;
   loginForm: FormGroup;
   jobApplicationForm: FormGroup;
   userIdCounter: number = 1;
   formData: any;
 
-    constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router) {
 
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -95,90 +52,22 @@ export class ResumesComponent {
     }
   }
 
-  // login() {
-  //   if (this.loginForm.valid) {
-  //     const username = this.loginForm.value.username;
-  //     const password = this.loginForm.value.password;
-
-  //     // Check if user is already logged in
-  //     const storedLoginDetails = localStorage.getItem('loginDetails');
-  //     if (!storedLoginDetails) {
-  //       // Store login details in local storage with the next available user ID
-  //       const userId = this.userIdCounter++;
-  //       localStorage.setItem('loginDetails', JSON.stringify({ username, userId }));
-  //       this.isLoggedIn = true;
-  //     } else {
-  //       alert('User is already logged in.');
-  //     }
-  //   }
-  // }
-
-  // storeUserDetails(): void {
-  //   // Retrieve the current user details from local storage
-  //   const storedLoginDetails = localStorage.getItem('loginDetails');
-  //   if (storedLoginDetails) {
-  //     const { username, userId } = JSON.parse(storedLoginDetails);
-  
-  //     // Retrieve the array of user details from local storage
-  //     const storedUserDetails = localStorage.getItem('storedUserDetails');
-  //     let userDetails: { username: string, userId: number }[] = [];
-  //     if (storedUserDetails) {
-  //       userDetails = JSON.parse(storedUserDetails);
-  //     }
-  
-  //     // Add the current user details to the array
-  //     userDetails.push({ username, userId });
-  
-  //     // Store the updated array back to local storage
-  //     localStorage.setItem('storedUserDetails', JSON.stringify(userDetails));
-  //   }
-  // }
-  
   // logout() {
-  //   const storedLoginDetails = localStorage.getItem('loginDetails');
-  //   if (storedLoginDetails) {
-  //     const { username, userId } = JSON.parse(storedLoginDetails);
+  //   // Store the current user's details before logging out
+  //   // this.storeUserDetails();
 
-  //     // Retrieve the array of user details from local storage
-  //     const storedUserDetails = localStorage.getItem('storedUserDetails');
-  //     let userDetails: { username: string, userId: number }[] = [];
-  //     if (storedUserDetails) {
-  //       userDetails = JSON.parse(storedUserDetails);
-  //     }
-
-  //     // Add the current user details to the array
-  //     userDetails.push({ username, userId });
-
-  //     // Store the updated array back to local storage
-  //     localStorage.setItem('storedUserDetails', JSON.stringify(userDetails));
-
-  //     // Increment the userIdCounter based on the last user ID
-  //     this.userIdCounter = userId + 1;
-  //   }
-
+  //   // Perform logout actions
   //   localStorage.removeItem('loginDetails');
   //   this.isLoggedIn = false;
-  //   this.router.navigate(['/jobs']);
+  //   // this.router.navigate(['/login']);
 
   //   // Reset stored usernames and user IDs
   //   this.resetStoredUserDetails();
   // }
-  logout() {
-    // Store the current user's details before logging out
-    // this.storeUserDetails();
-  
-    // Perform logout actions
-    localStorage.removeItem('loginDetails');
-    this.isLoggedIn = false;
-    // this.router.navigate(['/login']);
-  
-    // Reset stored usernames and user IDs
-    this.resetStoredUserDetails();
-  }
-  
-  resetStoredUserDetails() {
-    localStorage.removeItem('storedUserDetails');
-  }
+
+  // resetStoredUserDetails() {
+  //   localStorage.removeItem('storedUserDetails');
+  // }
 
 
   retrieveFormData(): void {
@@ -193,16 +82,20 @@ export class ResumesComponent {
     const formData = this.jobApplicationForm.value;
     localStorage.setItem('jobApplicationData', JSON.stringify(formData));
   }
+
   onSubmit() {
     if (this.jobApplicationForm.valid) {
       this.saveFormData();
+
       alert('Form data saved locally!');
+
       this.jobApplicationForm.reset();
-      this.router.navigate(['/login']); 
+
+      this.router.navigate(['/login']);
     } else {
       alert('Please fill in all required fields.');
     }
   }
-  
+
 
 }
