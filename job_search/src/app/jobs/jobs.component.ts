@@ -21,7 +21,7 @@ export class JobsComponent implements OnInit {
   showDescription: boolean[] = new Array(this.jobs.length).fill(false);
 
   applyOrRedirect(job: any): void {
-    const storedLoginDetails = localStorage.getItem('loginDetails');
+    const storedLoginDetails = localStorage.getItem('user');
 
     if (storedLoginDetails) {
       const { userId } = JSON.parse(storedLoginDetails);
@@ -135,7 +135,7 @@ export class JobsComponent implements OnInit {
   //     alert('Please login to apply for the job.');
   //     this.router.navigate(['/resumes']);
   //   }
-  // } ridht 
+  // } right 
 
   addJob() {
     if (this.category && this.companyName && this.location && this.description) {

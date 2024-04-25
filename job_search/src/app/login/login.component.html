@@ -1,4 +1,16 @@
 <div class="container">
+  <div class="card">
+    <h2>Login</h2>
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+      <input type="text" id="username" name="username" formControlName="username" placeholder="Username">
+      <input type="password" id="password" name="password" formControlName="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+    <button (click)="logout()">Logout</button> <!-- Add this button for logout -->
+  </div>
+</div>
+
+<!-- <div class="container">
 
   <div class="card">
 
@@ -7,8 +19,11 @@
       <input type="text" id="username" name="username" formControlName="username" placeholder="Username">
       <input type="password" id="password" name="password" formControlName="password" placeholder="Password">
       <button type="submit">Login</button>
+
+
+      <button (click)="logout()">Logout</button> 
     </form>
 
   </div>
   
-</div>
+</div> -->
