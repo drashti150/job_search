@@ -17,9 +17,12 @@ export class AdminComponent {
   selectedJobIndex: number | null = null;
   showJobList: boolean = false;
   jobs: any;
+  editingCategoryIndex: number | null = null;
   category: any;
   countryName: any;
   companyName: any;
+  jobIdCounter: number = 1;
+  jobApplications: any;
 
   constructor(private formBuilder: FormBuilder) {
 
@@ -29,9 +32,12 @@ export class AdminComponent {
 
     });
   }
+
   ngOnInit() {
     this.retrieveData();
+    // this.retrieveJobApplication();
   }
+  
   login() {
 
     if (this.loginForm.valid) {
@@ -91,6 +97,7 @@ export class AdminComponent {
   toggleCategoryPanel() {
     this.showCategoryPanel = !this.showCategoryPanel;
   }
+  
 
   addRecruiter() {
     if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
@@ -147,37 +154,6 @@ export class AdminComponent {
     this.storeData();
   }
 
-
-  // category
-  // 
-  // categoryName: string = '';
-  // editingCategoryIndex: number | null = null;
-
-  // addCategory() {
-  //   if (this.categoryName.trim() !== '') {
-  //     this.categories.push({ name: this.categoryName });
-
-  //     this.storeData();
-
-  //     this.resetCategoryFields();
-  //   }
-  // }
-
-  // editCategory(index: number) {
-  //   this.editingCategoryIndex = index;
-  //   this.categoryName = this.categories[index].name;
-  // }
-
-  // updateCategory() {
-  //   if (this.editingCategoryIndex !== null) {
-  //     this.categories[this.editingCategoryIndex].name = this.categoryName;
-
-  //     this.storeData();
-
-  //     this.resetCategoryFields();
-  //   }
-  // }
-
   deleteCategory(index: number) {
     this.categories.splice(index, 1);
 
@@ -186,13 +162,13 @@ export class AdminComponent {
     // this.resetCategoryFields();
   }
 
-  // resetCategoryFields() {
-  //   this.categoryName = '';
-  //   this.editingCategoryIndex = null;
-  // }
+  resetCategoryFields() {
+    this.category = '';
+    this.editingCategoryIndex = null;
+  }
 
   retrieveData() {
-
+  
     const storedRecruiters = localStorage.getItem('recruiters');
     if (storedRecruiters) {
       this.recruiters = JSON.parse(storedRecruiters);
@@ -224,40 +200,6 @@ export class AdminComponent {
     }
   }
 
-
-  // for job
-  // jobs: any[] = [];
-  // category: string = '';
-  // companyName: string = '';
-  // location: string = '';
-  // description: string = '';
-  // countryName: any;
-  // country: any;
-
-  // addJob() {
-  //   if (this.category && this.countryName && this.companyName && this.location && this.description) {
-  //     // Add new job to the list
-  //     this.jobs.push({
-  //       category:this.category,
-  //       country : this.countryName,
-  //       company: this.companyName,
-  //       location: this.location,
-  //       description: this.description,
-
-  //     });
-
-  //     // Save updated job list to local storage
-  //     localStorage.setItem('jobs', JSON.stringify(this.jobs));
-
-  //     // Clear input fields after adding job
-  //     this.category = '';
-  //     this.countryName = '';
-  //     this.companyName = '';
-  //     this.location = '';
-  //     this.description = '';
-
-  //   }
-  // }
   // // job post
   categories = [
     "Flutter",
@@ -310,7 +252,7 @@ export class AdminComponent {
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'Gujarat',
+      "country": 'gu',
       "category": 'Marketing'
     }, {
       "title": 'UI/UX Designer',
@@ -408,25 +350,12 @@ export class AdminComponent {
   ];
 
 
-  addJobPost(job: any) {
+  addJobPost(job: any,index = 1) {
+    job.id = this.jobIdCounter++;
     this.jobPosts.push(job);
     this.storeData();
   }
 
-  retrieveJobPosts() {
-    const storedJobPosts = localStorage.getItem('jobPosts');
-    if (storedJobPosts) {
-      this.jobPosts = JSON.parse(storedJobPosts);
-    }
-  }
-
-  // toggleJobList(): void {
-  //   // if (this.showRightPanel) {
-  //   //   this.showRightPanel = false;
-  //   //   this.selectedJobIndex = null;
-  //   // }
-  //   this.showJobList = !this.showJobList;
-  // }
 
   deleteJob(index: number) {
     this.jobPosts.splice(index, 1);
@@ -441,4 +370,95 @@ export class AdminComponent {
     localStorage.setItem('jobPosts', JSON.stringify(this.jobPosts));
   }
 
+  retrieveJobApplications(): void {
+    const storedJobApplications = localStorage.getItem('jobApplications');
+    if (storedJobApplications) {
+      this.jobApplications = JSON.parse(storedJobApplications);
+    }
+  }
+  
 }
+
+
+  // toggleJobList(): void {
+  //   // if (this.showRightPanel) {
+  //   //   this.showRightPanel = false;
+  //   //   this.selectedJobIndex = null;
+  //   // }
+  //   this.showJobList = !this.showJobList;
+  // }
+// ngOnInit() {
+  // this.retrieveData(); // Retrieve existing job posts from localStorage
+  // // Initialize jobIdCounter to one more than the highest existing ID, or 1 if there are no existing job posts
+  // this.jobIdCounter = this.jobPosts.length > 0 ? Math.max(...this.jobPosts.map(job => job.id)) + 1 : 1;
+// }
+
+
+    // retrieveJobPosts() {
+    //   const storedJobPosts = localStorage.getItem('jobPosts');
+    //   if (storedJobPosts) {
+    //     this.jobPosts = JSON.parse(storedJobPosts);
+    //   }
+    // }
+  
+  // category
+  // 
+  // categoryName: any = '';
+
+  // addCategory() {
+  //   if (this.categoryName.trim() !== '') {
+  //     this.categories.push({ name: this.categoryName });
+
+  //     this.storeData();
+
+  //     this.resetCategoryFields();
+  //   }
+  // }
+
+  // editCategory(index: number) {
+  //   this.editingCategoryIndex = index;
+  //   this.categoryName = this.categories[index].name;
+  // }
+
+  // updateCategory() {
+  //   if (this.editingCategoryIndex !== null) {
+  //     this.categories[this.editingCategoryIndex].name = this.categoryName;
+
+  //     this.storeData();
+
+  //     this.resetCategoryFields();
+  //   }
+  // }
+  // for job
+  // jobs: any[] = [];
+  // category: string = '';
+  // companyName: string = '';
+  // location: string = '';
+  // description: string = '';
+  // countryName: any;
+  // country: any;
+
+  // addJob() {
+  //   if (this.category && this.countryName && this.companyName && this.location && this.description) {
+  //     // Add new job to the list
+  //     this.jobs.push({
+  //       category:this.category,
+  //       country : this.countryName,
+  //       company: this.companyName,
+  //       location: this.location,
+  //       description: this.description,
+
+  //     });
+
+  //     // Save updated job list to local storage
+  //     localStorage.setItem('jobs', JSON.stringify(this.jobs));
+
+  //     // Clear input fields after adding job
+  //     this.category = '';
+  //     this.countryName = '';
+  //     this.companyName = '';
+  //     this.location = '';
+  //     this.description = '';
+
+  //   }
+  // }

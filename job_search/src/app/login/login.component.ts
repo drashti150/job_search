@@ -31,7 +31,7 @@ export class LoginComponent {
 
       // Check if user is already logged in
       const storedLoginDetails = localStorage.getItem('loginDetails');
-      if (!storedLoginDetails) {
+      if (storedLoginDetails) {
 
         const userId = this.userIdCounter++;
         localStorage.setItem('loginDetails', JSON.stringify({ username, userId }));
@@ -61,15 +61,15 @@ export class LoginComponent {
 
       // Add the current user details to the array
       userDetails.push({ username, userId });
-
+    
       localStorage.setItem('storedUserDetails', JSON.stringify(userDetails));
     }
   }
-
+  
   getUserIdFromLocalStorage(): number | null {
     const storedLoginDetails = localStorage.getItem('loginDetails');
     if (storedLoginDetails) {
-      const userDetailsArray: any[] = JSON.parse(storedLoginDetails);
+      const userDetailsArray = JSON.parse(storedLoginDetails);
 
       if (userDetailsArray.length > 0) {
         return userDetailsArray[0].userId;

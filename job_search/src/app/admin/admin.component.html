@@ -112,11 +112,14 @@
 
           <div class="category-list">
 
+            <!-- <input type="text" [(ngModel)]="category" placeholder="Enter category"> -->
+            <!-- <button (click)="addCategory()" class="add-button">ADD</button> -->
+
             <h2 class="section-header">All categories</h2>
 
             <select id="category-list" (change)="filterByCategory()">
               <option value="all">All Categories</option>
-              <option *ngFor="let category of categories" [value]="category">CategoryName : {{ category }}</option>
+              <option *ngFor="let category of categories" [value]="category"> {{ category }}</option>
             </select>
 
           </div>
@@ -139,7 +142,8 @@
         <button (click)="addJob()" class="add-button">ADD</button>
       </div> -->
 
-      <div>
+      
+        <div class="recruiter_box" *ngIf="showJobList">
 
         <h2>Job List</h2>
 

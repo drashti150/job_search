@@ -54,7 +54,7 @@ export class ResumesComponent {
 
   // logout() {
   //   // Store the current user's details before logging out
-  //   // this.storeUserDetails();
+  //   this.storeUserDetails();
 
   //   // Perform logout actions
   //   localStorage.removeItem('loginDetails');
@@ -65,24 +65,24 @@ export class ResumesComponent {
   //   this.resetStoredUserDetails();
   // }
 
-  // resetStoredUserDetails() {
-  //   localStorage.removeItem('storedUserDetails');
-  // }
-
-
-  retrieveFormData(): void {
-    // Retrieve form data from local storage
-    const storedFormData = localStorage.getItem('formData');
-    if (storedFormData) {
-      this.formData = JSON.parse(storedFormData);
-    }
+  resetStoredUserDetails() {
+    localStorage.removeItem('storedUserDetails');
   }
+
+
+  // retrieveFormData(): void {
+  //   // Retrieve form data from local storage
+  //   const storedFormData = localStorage.getItem('formData');
+  //   if (storedFormData) {
+  //     this.formData = JSON.parse(storedFormData);
+  //   }
+  // }
 
   saveFormData() {
     const formData = this.jobApplicationForm.value;
     localStorage.setItem('jobApplicationData', JSON.stringify(formData));
   }
-
+  
   onSubmit() {
     if (this.jobApplicationForm.valid) {
       this.saveFormData();
