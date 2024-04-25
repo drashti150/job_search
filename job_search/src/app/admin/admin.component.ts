@@ -268,7 +268,7 @@ export class AdminComponent {
   ];
 
   countries = [
-    "India",
+    "Gujarat",
     "Jaipur",
     "Kolkata",
     "Bangalore",
@@ -282,42 +282,42 @@ export class AdminComponent {
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
+      "country": 'Gujarat',
+      "category": 'Flutter'
+    }, {
+      "title": 'UI/UX Designer',
+      "company": 'Company A',
+      "location": 'Location X',
+      "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+      "country": 'Gujarat',
       "category": 'UI/UX Designer'
     }, {
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
-      "category": 'UI/UX Designer'
+      "country": 'Gujarat',
+      "category": 'Web design'
     }, {
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
-      "category": 'UI/UX Designer'
+      "country": 'Gujarat',
+      "category": 'Web developer'
     }, {
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
-      "category": 'UI/UX Designer'
+      "country": 'Gujarat',
+      "category": 'Marketing'
     }, {
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
-      "category": 'UI/UX Designer'
-    }, {
-      "title": 'UI/UX Designer',
-      "company": 'Company A',
-      "location": 'Location X',
-      "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
+      "country": 'Jaipur',
       "category": 'UI/UX Designer'
     },
     {
@@ -326,14 +326,14 @@ export class AdminComponent {
       "location": "Sarthana",
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "category": "UI/UX Designer",
-      "country": 'India'
+      "country": 'Mumbai'
 
     }, {
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
+      "country": 'Mumbai',
       "category": 'UI/UX Designer'
     },
     {
@@ -341,7 +341,7 @@ export class AdminComponent {
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
+      "country": 'Kolkata',
       "category": 'UI/UX Designer'
     },
     {
@@ -349,7 +349,7 @@ export class AdminComponent {
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'India',
+      "country": 'Bangalore',
       "category": 'UI/UX Designer'
     },
     {
@@ -358,7 +358,7 @@ export class AdminComponent {
       "location": "Motavarachha",
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "category": "Flutter",
-      "country": 'India'
+      "country": 'Jaipur'
 
     },
     {
