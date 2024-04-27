@@ -8,77 +8,182 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
-  username: string = '';
+ 
+  email: string = '';
   password: string = '';
   userIdCounter: number = 1;
-  loginForm: any;
+  loginForm: FormGroup;
   isLoggedIn = false;
   userDetails: any = {};
-  lastUserId: number = parseInt(localStorage.getItem('lastUserId') || '0');
-  showLoginForm: boolean = false;
-  
-constructor(private fb: FormBuilder ,private router : Router) {
-  this.loginForm = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
-  });
+  lastUserId: number = parseInt(localStorage.getItem('lastLoginUserId') || '0');
+  storedUserDetails: { email: string, userId: number }[] = JSON.parse(localStorage.getItem('storedUserDetails') || '[]');
 
-  // Check if user is already logged in on component initialization
-  const user = localStorage.getItem('user');
-  if (user) {
-    this.userDetails = JSON.parse(user);
-    this.isLoggedIn = true;
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.userDetails = JSON.parse(user);
+      this.isLoggedIn = true;
+    }
   }
+
+  login() {
+    if (this.loginForm.valid) {
+      console.log('Login Form Values:', this.loginForm.value);
+      this.isLoggedIn = true;
+
+      this.lastUserId++;
+      localStorage.setItem('lastLoginUserId', this.lastUserId.toString());
+
+      this.userDetails = {
+        email: this.loginForm.value.email,
+        userId: this.lastUserId
+      };
+
+      this.storedUserDetails.push(this.userDetails);
+      localStorage.setItem('storedUserDetails', JSON.stringify(this.storedUserDetails));
+
+      console.log("Login Successfully.")
+      this.router.navigate(['/resumes']);
+
+      localStorage.setItem('user', JSON.stringify(this.userDetails));
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
+  }
+ 
+
+  // logout() {
+  //   this.loginForm.reset();
+  //   this.isLoggedIn = false;
+
+  //   localStorage.removeItem('user');
+  // }
 }
+
+
+
+
+//   password: string = '';
+//   userIdCounter: number = 1;
+//   loginForm: any;
+//   isLoggedIn = false;
+
+//   userDetails: any = {};
+
+//   lastUserId: number = parseInt(localStorage.getItem('lastLoginUserId') || '0');
+
+// constructor(private fb: FormBuilder ,private router : Router) {
+//   this.loginForm = this.fb.group({
+//     username: ['', Validators.required],
+//     password: ['', Validators.required]
+//   });
+
+//   // Check if user is already logged in on component initialization
+//   const user = localStorage.getItem('user');
+//   if (user) {
+//     this.userDetails = JSON.parse(user);
+//     this.isLoggedIn = true;
+//   }
+// }
+
+// // login() {
+ 
+// //   console.log('Login Form Values:', this.loginForm.value);
+// //   this.isLoggedIn = true;
+
+// //   this.lastUserId++;
+// //   localStorage.setItem('lastUserId', this.lastUserId.toString());
+
+// //   this.userDetails = {
+// //     username: this.loginForm.value.username,
+// //     userId: this.lastUserId
+// //   };
+// //   console.log("Login Successfully.")
+// //   this.router.navigate(['/jobs']);
+
+// //   localStorage.setItem('user', JSON.stringify(this.userDetails));
+// // }
 
 // login() {
- 
-//   console.log('Login Form Values:', this.loginForm.value);
-//   this.isLoggedIn = true;
+//   if (this.loginForm.valid) {
 
-//   this.lastUserId++;
-//   localStorage.setItem('lastUserId', this.lastUserId.toString());
+//     console.log('Login Form Values:', this.loginForm.value);
+//     this.isLoggedIn = true;
 
-//   this.userDetails = {
-//     username: this.loginForm.value.username,
-//     userId: this.lastUserId
-//   };
-//   console.log("Login Successfully.")
-//   this.router.navigate(['/jobs']);
+//     this.lastUserId++;
+//     localStorage.setItem('lastLoginUserId', this.lastUserId.toString());
 
-//   localStorage.setItem('user', JSON.stringify(this.userDetails));
+//     this.userDetails = {
+//       username: this.loginForm.value.username,
+//       userId: this.lastUserId
+//     };
+
+//     console.log("Login Successfully.")
+//     this.router.navigate(['/jobs']);
+
+//     localStorage.setItem('user', JSON.stringify(this.userDetails));
+//   } else {
+//     this.loginForm.markAllAsTouched();
+//   }
 // }
-login() {
-  if (this.loginForm.valid) {
 
-    console.log('Login Form Values:', this.loginForm.value);
-    this.isLoggedIn = true;
+// logout() {
+//   this.loginForm.reset();
+//   this.isLoggedIn = false;
 
-    this.lastUserId++;
-    localStorage.setItem('lastloginUserId', this.lastUserId.toString());
+//   localStorage.removeItem('user');
+// }
+// }
 
-    this.userDetails = {
-      username: this.loginForm.value.username,
-      userId: this.lastUserId
-    };
+// constructor(private fb: FormBuilder, private router: Router) {
+//   this.loginForm = this.fb.group({
+//     username: ['', Validators.required],
+//     password: ['', Validators.required]
+//   });
 
-    console.log("Login Successfully.")
-    this.router.navigate(['/jobs']);
+//   // Check if user is already logged in on component initialization
+//   const user = localStorage.getItem('user');
+//   if (user) {
+//     this.userDetails = JSON.parse(user);
+//     this.isLoggedIn = true;
+//   }
+// }
 
-    localStorage.setItem('user', JSON.stringify(this.userDetails));
-  } else {
-    this.loginForm.markAllAsTouched();
-  }
-}
+// login() {
+//   if (this.loginForm.valid) {
+//     console.log('Login Form Values:', this.loginForm.value);
+//     this.isLoggedIn = true;
 
-logout() {
-  this.loginForm.reset();
-  this.isLoggedIn = false;
+//     this.lastUserId++;
+//     localStorage.setItem('lastUserId', this.lastUserId.toString());
 
-  localStorage.removeItem('user');
-}
-}
+//     this.userDetails = {
+//       username: this.loginForm.value.username,
+//       userId: this.lastUserId
+//     };
+
+//     console.log("Login Successfully.")
+//     this.router.navigate(['/jobs']);
+
+//     localStorage.setItem('user', JSON.stringify(this.userDetails));
+//   } else {
+//     this.loginForm.markAllAsTouched();
+//   }
+// }
+
+// logout() {
+//   this.loginForm.reset();
+//   this.isLoggedIn = false;
+
+//   localStorage.removeItem('user');
+// }
+
+
 
   // constructor(private fb: FormBuilder, private router: Router) {
 

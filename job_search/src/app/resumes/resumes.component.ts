@@ -11,6 +11,7 @@ export class ResumesComponent {
   jobApplicationForm: FormGroup;
 
   constructor(private fb: FormBuilder , private router: Router) {
+
     this.jobApplicationForm = this.fb.group({
       fullname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -30,8 +31,8 @@ export class ResumesComponent {
   saveFormData() {
     const formData = this.jobApplicationForm.value;
 
-    let userId: number = parseInt(localStorage.getItem('userId') || '0') + 1;
-    // localStorage.setItem('userId', userId.toString());
+    let userId: number = parseInt(localStorage.getItem('jobApplieduserId') || '0') + 1;
+
     localStorage.setItem('jobApplieduserId', userId.toString());
 
 
@@ -48,13 +49,32 @@ export class ResumesComponent {
   onSubmit() {
     if (this.jobApplicationForm.valid) {
       this.saveFormData();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/jobs']);
 
     } else {
       alert('Please fill in all required fields.');
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   isLoggedIn = false;
 //   loginForm: FormGroup;
 //   jobApplicationForm: FormGroup;

@@ -14,20 +14,20 @@
 }
 
 .login {
-  
-    width: 100%;
-    max-width: 400px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 3px solid black;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 3px solid black;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 
 /* Left panel styles */
 .left-panel {
@@ -80,7 +80,8 @@ button[type="submit"]:hover {
 }
 
 /* Admin panel styles */
-.login h2,h1{
+.login h2,
+h1 {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
@@ -92,7 +93,7 @@ h2 {
   color: #333;
   /* margin-left: 40%; */
 }
- 
+
 .recruiter input[type="text"] {
   width: 20%;
   margin-left: 10px;
@@ -120,7 +121,7 @@ h2 {
 
 .recruiter h2,
 .category h2,
-.job h2{
+.job h2 {
   cursor: pointer;
   color: #007bff;
 }
@@ -196,6 +197,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
 .job-list {
   list-style: none;
   padding: 0;
@@ -203,16 +205,17 @@ button:hover {
 
 .job-list li {
   display: inline-block;
-  margin-right: 20px; 
+  margin-right: 20px;
   vertical-align: top;
 }
+
 @media screen and (min-width: 768px) {
   .container {
     flex-direction: row;
   }
 
   .login {
-    width: 30%; 
+    width: 30%;
     margin: 20px;
   }
 
@@ -228,6 +231,6 @@ button:hover {
   }
 
   .login {
-    width: 90%; 
+    width: 90%;
   }
 }

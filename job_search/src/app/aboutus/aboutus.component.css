@@ -1,80 +1,84 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 30px;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
 
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+p {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.highlight {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.quote {
+  font-style: italic;
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+}
+
+@media screen and (max-width:600px) {
   body {
-    font-family: Arial, sans-serif;
-    padding: 30px;
-    line-height: 1.6;
-    background-color: #f4f4f4;
+    padding: 10px;
   }
 
   .container {
-    max-width: 900px;
-    margin:auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+    margin-bottom: 10px;
+    font-size: 24px;
   }
 
   p {
-    margin-bottom: 15px;
-    color: #666;
+    margin-bottom: 8px;
+    font-size: 14px;
   }
 
   ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
   }
 
   li {
-    margin-bottom: 10px;
-  }
-  .highlight {
-    color: #007bff;
-    font-weight: bold;
-  }
-  .quote {
-    font-style: italic;
-    text-align: center;
-    margin-top: 20px;
-    color: #888;
+    margin-bottom: 6px;
+
   }
 
-  @media screen and (max-width:600px){
-    body{
-      padding: 10px;
-    }
-
-    .container{
-      border-radius: 0;
-      box-shadow: none;
-    }
-    h1{
-      margin-bottom: 10px;
-      font-size: 24px;
-    }
-    p{
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-    ul{
-      margin-bottom:10px;
-      
-    }
-    li{
-      margin-bottom: 6px;
-
-    }
-    .quite{
-      margin-top: 10px;
-      font-size: 12px;
-    }
+  .quite {
+    margin-top: 10px;
+    font-size: 12px;
   }
-
-
+}

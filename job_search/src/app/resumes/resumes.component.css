@@ -6,14 +6,14 @@ body {
 }
 
 input[type="username"],
-input[type="password"]{
+input[type="password"] {
   width: 50%;
   height: 40px;
   border-radius: 5px;
   display: flex;
 }
 
-button[type="submit"]{
+button[type="submit"] {
   background-color: #0056b3;
   width: 100px;
   height: 40px;
@@ -21,6 +21,7 @@ button[type="submit"]{
   margin-top: 20px;
   color: #fff;
 }
+
 /* Apply general styles to the form */
 form {
   max-width: 600px;
@@ -67,10 +68,10 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-h2{
+h2 {
   text-align: center;
 }
+
 input[type="submit"]:hover {
   background-color: #0056b3;
 }
-
