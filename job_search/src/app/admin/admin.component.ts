@@ -23,7 +23,24 @@ export class AdminComponent {
   companyName: any;
   jobIdCounter: number = 1;
   jobApplications: any;
-
+  description: any;
+  location: any;
+  selectedCategory: any;
+  recruiterForm: FormGroup | undefined;
+  recruiterName: any = '';
+  recruiterEmail: any = '';
+  recruiterCategory: any = '';
+  recruiters: {  appliedCategories: any; name: string, email: string, category: string }[] = [];
+  editingIndex: number | null = null;
+  index: any = '';
+  isEditing: any = '';
+  showCategoryPanel: boolean = false;
+    selectedRecruiterName: string ='';
+    selectedRecruiterCategory: string = '';
+    recruiterCategories: string = ''; // Assuming recruiterCategories is an array of strings
+recruiter: any;
+    
+  
   constructor(private formBuilder: FormBuilder) {
 
     this.loginForm = this.formBuilder.group({
@@ -34,9 +51,23 @@ export class AdminComponent {
   }
 
   ngOnInit() {
-    this.retrieveData();
+    // Set ids for job posts
+    this.jobPosts.forEach(job => {
+      job.id = this.jobIdCounter++;
+    });
+  
+  
+      // Set ids for job posts
+      // this.jobPosts.forEach((job, index) => {
+      //   job.id = index + 1;
+      // });
+     this.retrieveData();
+      const storedCounter = localStorage.getItem('jobIdCounter');
+      this.jobIdCounter = storedCounter ? parseInt(storedCounter, 10) : 1;
+    }
+    
     // this.retrieveJobApplication();
-  }
+  
   
   login() {
 
@@ -46,10 +77,10 @@ export class AdminComponent {
       const password = this.loginForm.value.password;
 
       if (username === 'admin' && password === 'password') {
-        console.log('Login successful');
+        alert('Login successful');
         this.isLoggedIn = true;
       } else {
-        console.log('Invalid username or password');
+        alert('Invalid username or password');
       }
 
       this.loginForm.reset();
@@ -83,34 +114,30 @@ export class AdminComponent {
     this.recruiterCategory = '';
   }
 
-  // recruiter
-
-  recruiterName: any = '';
-  recruiterEmail: any = '';
-  recruiterCategory: any = '';
-  recruiters: { name: string, email: string, category: string }[] = [];
-  editingIndex: number | null = null;
-  index: any = '';
-  isEditing: any = '';
-  showCategoryPanel: boolean = false;
-
-  toggleCategoryPanel() {
-    this.showCategoryPanel = !this.showCategoryPanel;
+  getRecruitersByCategory(category: string) {
+    return this.recruiters.filter(recruiter => recruiter.appliedCategories.includes(category));
   }
+  addJob() {
+    if (this.category && this.countryName && this.companyName && this.location && this.description) {
+      // Pass the selected recruiter's name when adding a new job post
+      this.addJobPost({
+        category: this.category,
+        country: this.countryName,
+        company: this.companyName,
+        location: this.location,
+        description: this.description,
+      }, this.selectedRecruiterName);
   
-
-  addRecruiter() {
-    if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
-      this.recruiters.push({
-        name: this.recruiterName,
-        email: this.recruiterEmail,
-        category: this.recruiterCategory
-      });
-
-      this.storeData();
-
-      this.resetFields();
+      // Clear input fields after adding job
+      this.category = '';
+      this.countryName = '';
+      this.companyName = '';
+      this.location = '';
+      this.description = '';
     }
+  }
+   toggleCategoryPanel() {
+    this.showCategoryPanel = !this.showCategoryPanel;
   }
 
   editRecruiter(index: number) {
@@ -133,7 +160,7 @@ export class AdminComponent {
 
   updateRecruiter() {
     if (this.index === null) {
-      console.error("Index is null.");
+      alert("Index is null.");
       return;
     }
 
@@ -219,42 +246,47 @@ export class AdminComponent {
   ];
 
   jobPosts: any[] = [
-    {
+    {"id": 1,
       "title": 'UI/UX Designer',
-      "company": 'Company A',
+      "company": 'Company ABC',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'Flutter'
-    }, {
+    }, 
+    {"id": 2,
       "title": 'UI/UX Designer',
-      "company": 'Company A',
+      "company": 'Company XYZ',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'UI/UX Designer'
-    }, {
-      "title": 'UI/UX Designer',
-      "company": 'Company A',
+  }, 
+    {"id": 3,
+    "title": 'UI/UX Designer',
+      "company": 'Company DEF',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'Web design'
-    }, {
+    }, 
+    {"id": 4,
       "title": 'UI/UX Designer',
-      "company": 'Company A',
+      "company": 'Company ABCD',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'Web developer'
-    }, {
+    }, 
+    {"id": 5,
       "title": 'UI/UX Designer',
-      "company": 'Company A',
+      "company": 'Company EFG',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
-      "country": 'gu',
+      "country": 'Gujarat',
       "category": 'Marketing'
-    }, {
+    }, 
+    {"id": 6,
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
@@ -262,7 +294,7 @@ export class AdminComponent {
       "country": 'Jaipur',
       "category": 'UI/UX Designer'
     },
-    {
+    {"id": 7,
       "title": "UI/UX Designer",
       "company": "Design Co.",
       "location": "Sarthana",
@@ -270,23 +302,24 @@ export class AdminComponent {
       "category": "UI/UX Designer",
       "country": 'Mumbai'
 
-    }, {
+    }, 
+    {"id": 8,
       "title": 'UI/UX Designer',
-      "company": 'Company A',
+      "company": 'Company ABC',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Mumbai',
       "category": 'UI/UX Designer'
     },
-    {
+    {"id": 9,
       "title": 'UI/UX Designer',
-      "company": 'Company A',
+      "company": 'system',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Kolkata',
       "category": 'UI/UX Designer'
     },
-    {
+    {"id": 10,
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
@@ -294,7 +327,7 @@ export class AdminComponent {
       "country": 'Bangalore',
       "category": 'UI/UX Designer'
     },
-    {
+    {"id": 11,
       "title": "Flutter",
       "company": "Data Insights Inc.",
       "location": "Motavarachha",
@@ -303,7 +336,7 @@ export class AdminComponent {
       "country": 'Jaipur'
 
     },
-    {
+    {"id": 12,
       "title": "Flutter",
       "company": "Data Insights Inc.",
       "location": "Motavarachha",
@@ -312,7 +345,7 @@ export class AdminComponent {
       "country": 'Mumbai'
 
     },
-    {
+    {"id": 13,
       "title": "Flutter",
       "company": "Data Insights Inc.",
       "location": "Motavarachha",
@@ -321,7 +354,7 @@ export class AdminComponent {
       "country": 'Kolkata'
 
     },
-    {
+    {"id": 14,
       "title": 'Web design',
       "company": 'xyz',
       "location": 'Adajan',
@@ -330,7 +363,7 @@ export class AdminComponent {
       "category": 'Web design',
 
     },
-    {
+    {"id": 15,
       "title": 'Web developer',
       "company": 'abc',
       "location": 'LalDarwaja',
@@ -338,7 +371,7 @@ export class AdminComponent {
       "country": 'Kolkata',
       "category": 'Web developer',
     },
-    {
+    {"id": 16,
       "title": 'Web developer',
       "company": 'abcd',
       "location": 'Varachha',
@@ -350,13 +383,31 @@ export class AdminComponent {
   ];
 
 
-  addJobPost(job: any,index = 1) {
-    job.id = this.jobIdCounter++;
+  // addJobPost(job: any) {
+  //   job.id = this.jobIdCounter++;
+  //   this.jobPosts.push(job);
+  //   this.storeData();
+  // }
+  
+  // addJobPost(job: any) {
+  //   job.id = this.jobIdCounter;
+  //   this.jobIdCounter++; // Increment the counter after assigning the ID
+  //   this.jobPosts.push(job);
+  //   this.storeData();
+  // }
+  addJobPost(job: any, category: string) {
+    // Find the recruiter by category
+    const recruiter = this.recruiters.find(recruiter => recruiter.category === category);
+    if (recruiter) {
+      // Use the recruiter's name for the job post
+      job.recruiterName = recruiter.name;
+    }
+    job.id = this.jobIdCounter;
+    this.jobIdCounter++; // Increment the counter after assigning the ID
     this.jobPosts.push(job);
     this.storeData();
   }
-
-
+  
   deleteJob(index: number) {
     this.jobPosts.splice(index, 1);
 
@@ -376,7 +427,55 @@ export class AdminComponent {
       this.jobApplications = JSON.parse(storedJobApplications);
     }
   }
-  
+ 
+
+  // Method to add a new recruiter
+  addRecruiter() {
+    if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
+      const existingRecruiter = this.recruiters.find(recruiter => recruiter.name === this.recruiterName);
+
+      if (existingRecruiter) {
+        // Update the existing recruiter's applied categories
+        if (!existingRecruiter.appliedCategories.includes(this.recruiterCategory)) {
+          existingRecruiter.appliedCategories.push(this.recruiterCategory);
+        }
+      } else {
+        // Add a new recruiter entry
+        this.recruiters.push({
+          name: this.recruiterName,
+          email: this.recruiterEmail,
+          category: this.recruiterCategory,
+          appliedCategories: [this.recruiterCategory] // Initialize applied categories array
+        });
+      }
+
+      this.storeData();
+
+      this.resetFields();
+    }
+  }
+
+  // addRecruiter() {
+  //   if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
+  //     this.recruiters.push({
+  //       name: this.recruiterName,
+  //       email: this.recruiterEmail,
+  //       category: this.recruiterCategory
+  //     });
+
+  //     this.storeData();
+
+  //     this.resetFields();
+  //   }
+  // }
+
+  // Method to check if a recruiter has applied in a specific category
+  recruiterAppliedInCategory(recruiterName: string, category: string): boolean {
+    const recruiter = this.recruiters.find(recruiter => recruiter.name === recruiterName);
+    return !!recruiter && recruiter.appliedCategories.includes(category);
+
+  // Other methods...
+}
 }
 
 

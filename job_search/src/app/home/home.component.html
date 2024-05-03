@@ -3,6 +3,47 @@
     <h1>The Easiest Way to Get Your New Job</h1>
     <p>Find Jobs, Employment & Career Opportunities</p>
 
+    <div class="list">
+      <!-- <label for="country">Select Country:</label> -->
+      <select id="country-list" [(ngModel)]="selectedCountry">
+        <option value="all">All</option>
+        <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+      </select>
+
+      <!-- <label for="category">Select Category:</label> -->
+      <select id="category-list" [(ngModel)]="selectedCategory">
+        <option value="all">All</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+
+      <button class="search" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+</body>
+
+<div *ngIf="filteredJobPosts.length > 0">
+
+  <h2> Job Posts</h2>
+  <!-- Display filtered job posts -->
+  <div class="job-post" *ngFor="let job of filteredJobPosts">
+    <p>Id: {{job.id}}</p>
+    <p>Category : {{job.category}}</p>
+    <p>Country : {{job.country}}</p>
+    <p>Company : {{job.company}}</p>
+    <p>Location : {{job.location}}</p>
+    <p>Description : {{job.description}}</p>
+    <button (click)="applyForJob(job)" [disabled]="job.applied">Apply</button>
+  </div>
+  
+</div>
+
+
+<!-- 
+<body>
+  <div class="container">
+    <h1>The Easiest Way to Get Your New Job</h1>
+    <p>Find Jobs, Employment & Career Opportunities</p>
+
     <form (submit)="filterJobPosts()">
 
       <select id="country-list" name="country" [(ngModel)]="selectedCountry">
@@ -20,7 +61,6 @@
   </div>
 </body>
 
-<!-- Display filtered job posts here -->
 <div class="job-list">
   <h1>Job List</h1>
 
@@ -29,6 +69,7 @@
     <h2>{{ job.title }}</h2>
 
     <div class="job">
+      <p>Id: {{job.id}}</p>
       <p>Category : {{job.category}}</p>
       <p>Country : {{job.country}}</p>
       <p>Company : {{job.company}}</p>
@@ -40,4 +81,4 @@
     <button class="applied-button" *ngIf="job.applied" disabled> Applied</button>
 
   </div>
-</div>
+</div> -->

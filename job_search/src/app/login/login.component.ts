@@ -31,31 +31,68 @@ export class LoginComponent {
     }
   }
 
+  // login() {
+  //   if (this.loginForm.valid) {
+  //     console.log('Login Form Values:', this.loginForm.value);
+  //     this.isLoggedIn = true;
+
+  //     this.lastUserId++;
+  //     localStorage.setItem('lastLoginUserId', this.lastUserId.toString());
+
+  //     this.userDetails = {
+  //       email: this.loginForm.value.email,
+  //       userId: this.lastUserId
+  //     };
+
+  //     this.storedUserDetails.push(this.userDetails);
+  //     localStorage.setItem('storedUserDetails', JSON.stringify(this.storedUserDetails));
+
+  //     console.log("Login Successfully.")
+  //     this.router.navigate(['/resumes']);
+
+  //     localStorage.setItem('user', JSON.stringify(this.userDetails));
+  //   } else {
+  //     this.loginForm.markAllAsTouched();
+  //   }
+  //      // Clear input fields after adding job
+  //     this.email = '';
+  //     this.password = '';
+  // }
   login() {
     if (this.loginForm.valid) {
-      console.log('Login Form Values:', this.loginForm.value);
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+  
+      // Check if the email already exists in stored user details
+      const emailExists = this.storedUserDetails.some(user => user.email === email);
+  
+      if (emailExists) {
+        alert('Email already exists. Please use a different email.');
+        return;
+      }
+  
+      // If email doesn't exist, proceed with login
       this.isLoggedIn = true;
-
       this.lastUserId++;
       localStorage.setItem('lastLoginUserId', this.lastUserId.toString());
-
+  
       this.userDetails = {
-        email: this.loginForm.value.email,
+        email: email,
         userId: this.lastUserId
       };
-
+  
       this.storedUserDetails.push(this.userDetails);
       localStorage.setItem('storedUserDetails', JSON.stringify(this.storedUserDetails));
-
-      console.log("Login Successfully.")
+  
+      console.log("Login Successfully.");
       this.router.navigate(['/resumes']);
-
+  
       localStorage.setItem('user', JSON.stringify(this.userDetails));
     } else {
       this.loginForm.markAllAsTouched();
     }
   }
- 
+  
 
   // logout() {
   //   this.loginForm.reset();

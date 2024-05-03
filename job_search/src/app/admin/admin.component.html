@@ -54,6 +54,28 @@
 
         <div class="recruiter_box" *ngIf="showRecruitersPanel">
 
+          <div>
+            <label for="recruiterName">Recruiter Name:</label>
+            <select id="recruiterName" [(ngModel)]="selectedRecruiterName">
+              <option *ngFor="let recruiter of recruiters" [value]="recruiter.name">{{ recruiter.name }}</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="recruiterCategory">Recruiter Category:</label>
+            <select id="recruiterCategory" [(ngModel)]="selectedRecruiterCategory">
+              <option *ngFor="let category of recruiterCategories" [value]="recruiter.category">{{recruiter.category }}
+              </option>
+            </select>
+          </div>
+          <!-- 
+          <div>
+            <label for="category">Category:</label>
+            <select id="category" [(ngModel)]="selectedRecruiterCategorty">
+              <option *ngFor="let category of categories" [value]="this.recruiter.category">{{this.recruiter.category }}</option>
+            </select>
+          </div> -->
+
           <div class="recruiter">
 
             <h1>Recruiter List</h1>
@@ -102,6 +124,22 @@
 
       <!-- category -->
 
+      <!-- <div *ngIf="isLoggedIn">
+        <div *ngIf="showCategoriesPanel">
+           Display recruiters grouped by category -->
+      <!-- <h2>Recruiters by Category</h2>
+          <ul>
+            <li *ngFor="let category of categories">
+              <h3>{{ category }}</h3>
+              <ul>
+                <li *ngFor="let recruiter of getRecruitersByCategory(category)">
+                  {{ recruiter.name }} - {{ recruiter.email }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div> -->
       <div class="recruiter_box" *ngIf="showCategoriesPanel">
 
         <div class="categories">
@@ -127,21 +165,6 @@
         </div>
 
       </div>
-
-
-      <!-- Job Form -->
-
-      <!-- <div>
-        <h2>Create Job</h2>
-        <input type="text" placeholder="Enter job category" [(ngModel)]="category">
-        <input type="text" placeholder="Enter job country" [(ngModel)]="countryName">
-        <input type="text" placeholder="Enter company name " [(ngModel)]="companyName">
-        <input type="text" placeholder="Enter location" [(ngModel)]="location">
-        <input type="text" placeholder="Enter job description" [(ngModel)]="description">
-
-        <button (click)="addJob()" class="add-button">ADD</button>
-      </div> -->
-
 
       <div class="recruiter_box" *ngIf="showJobList">
 

@@ -8,6 +8,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { AdminComponent } from './admin/admin.component';
 import { JobService } from './job.service';
 import { LoginComponent } from './login/login.component';
+import { JobPipe } from './job.pipe';
+import { JobapplicationComponent } from './jobapplication/jobapplication.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/admin', pathMatch: 'full' },
@@ -18,6 +20,9 @@ const routes: Routes = [
   { path: 'jobs', component: JobsComponent },
   { path: 'employers', component: EmployeeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'jobapplication', component: JobapplicationComponent },
+
+
 
 
 ];

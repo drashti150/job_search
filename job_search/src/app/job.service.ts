@@ -3,16 +3,38 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class JobService {
-  applyForJob(id: any) {
-    throw new Error('Method not implemented.');
+export class JobService { 
+private jobs: { title: string, description: string, applicants: string[] }[] = [];
+
+constructor() { 
+  // Retrieve jobs from local storage when the service is instantiated
+  const storedJobs = localStorage.getItem('jobs');
+    this.jobs = storedJobs ? JSON.parse(storedJobs) : [];
   }
+
+  postJob(title: string, description: string) {
+    this.jobs.push({ title, description, applicants: [] });
+    this.saveJobsToLocalStorage();
+  }
+
+  applyForJob(jobIndex: number, applicantName: string) {
+    this.jobs[jobIndex].applicants.push(applicantName);
+    this.saveJobsToLocalStorage();
+  }
+
+  private saveJobsToLocalStorage() {
+    localStorage.setItem('jobs', JSON.stringify(this.jobs));
+  }
+
+  getJobs() {
+    return this.jobs;
+  }
+
+ 
   getUserAppliedJobs() {
     throw new Error('Method not implemented.');
   }
-  getJobs() {
-    throw new Error('Method not implemented.');
-  }
+ 
   
   isLoggedIn = false;
 

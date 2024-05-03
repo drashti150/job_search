@@ -1,1 +1,28 @@
-<p>employee works!</p>
+<!-- <p>employee works!</p>
+<div>
+    <label for="userEmail">User Email:</label>
+    <input type="text" id="userEmail" [(ngModel)]="title" placeholder="Enter user email">
+  </div>
+  <div>
+    <label for="category">Category:</label>
+    <input type="text" id="category" [(ngModel)]="description" placeholder="Enter category">
+  </div>
+  <div>
+    <button >Get Applications</button>
+  </div>
+   -->
+   <div class="job-posting-container">
+    <h2>Post a Job</h2>
+    <form (ngSubmit)="postJob()">
+      <div class="form-group">
+        <label for="title">Job Title:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="title" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Job Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="description" required></textarea>
+      </div>
+      <button type="submit">Post Job</button>
+    </form>
+  </div>
+  

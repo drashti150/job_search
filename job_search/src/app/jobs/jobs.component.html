@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <h1>Job List</h1>
 
   <ul class="job-list">
@@ -14,6 +14,29 @@
         <p *ngIf="showDescription[i]">Description: {{job.description}}</p>
 
         <button class="apply-button" (click)="applyOrRedirect(job)">Apply Now</button>
+        <button class="applied-button" *ngIf="job.applied" disabled>Applied</button>
+
+      </div>
+    </li>
+  </ul>
+</div> -->
+<div>
+  <h1>Job List</h1>
+
+  <ul class="job-list">
+    <li *ngFor="let job of jobs; let i = index">
+
+      <div class="job-container" (click)="toggleDescription(i)">
+
+        <h2>{{job.title}}</h2>
+        <p>Id:{{job.id}}</p>
+        <p>Category: {{job.category}}</p>
+        <p>Country: {{job.country}}</p>
+        <p>Company: {{job.company}}</p>
+        <p>Location: {{job.location}}</p>
+        <p *ngIf="showDescription[i]">Description: {{job.description}}</p>
+
+        <button class="apply-button" (click)="applyOrRedirect(job)" [disabled]="job.applied">Apply Now</button>
         <button class="applied-button" *ngIf="job.applied" disabled>Applied</button>
 
       </div>

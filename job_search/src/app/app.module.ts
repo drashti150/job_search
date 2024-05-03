@@ -13,8 +13,9 @@ import { JobsComponent } from './jobs/jobs.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { JobapplicationComponent } from './jobapplication/jobapplication.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +30,13 @@ import { LoginComponent } from './login/login.component';
     AboutusComponent,
     FooterComponent,
     LoginComponent,
+    JobapplicationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

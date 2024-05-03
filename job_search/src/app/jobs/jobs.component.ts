@@ -22,6 +22,102 @@ export class JobsComponent implements OnInit {
   userId: string = ''; // Initialize with an empty string
 
 
+  ngOnInit(): void {
+    this.retrieveData();
+    this.retrieveJobApplications();
+    this.initializeShowDescription();
+    this.updateLocalStorage();
+    this.updateJobStatus();
+  }
+
+
+
+  toggleDescription(index: number) {
+    this.showDescription[index] = !this.showDescription[index];
+  }
+
+  initializeShowDescription(): void {
+    this.showDescription = new Array(this.jobs.length).fill(false);
+  }
+
+  retrieveData() {
+    const storedJobs = localStorage.getItem('jobPosts');
+    if (storedJobs) {
+      this.jobs = JSON.parse(storedJobs);
+    }
+  }
+ 
+  retrieveJobApplications(): void {
+    const storedJobApplications = localStorage.getItem('jobApplications');
+    if (storedJobApplications) {
+      this.jobApplications = JSON.parse(storedJobApplications);
+    }
+  }
+
+  applyOrRedirect(job: any): void {
+    const storedLoginDetails = localStorage.getItem('user');
+
+    if (storedLoginDetails) {
+      const { userId } = JSON.parse(storedLoginDetails);
+
+      const userAppliedJobs = this.jobApplications[userId] || [];
+
+      if (userAppliedJobs.includes(job.id)) {
+        // If job is already applied, remove the application
+        const index = userAppliedJobs.indexOf(job.id);
+        if (index !== -1) {
+          userAppliedJobs.splice(index, 1);
+          job.applied = false;
+          this.updateLocalStorage();
+        }
+      } else {
+        userAppliedJobs.push(job.id);
+        job.applied = true;
+        this.jobApplications[userId] = userAppliedJobs;
+        this.updateLocalStorage();
+      }
+    } else {
+      alert('Please login to apply for the job.');
+      this.router.navigate(['/login']);
+    }
+  }
+  
+  
+updateJobStatus(): void {
+  const storedLoginDetails = localStorage.getItem('user');
+  if (storedLoginDetails) {
+    const { userId } = JSON.parse(storedLoginDetails);
+    const userAppliedJobs = this.jobApplications[userId] || [];
+    this.jobs.forEach(job => {
+      job.applied = userAppliedJobs.includes(job.id);
+    });
+  }
+}
+  addJob() {
+    if (this.category && this.companyName && this.location && this.description) {
+      const newJob = {
+        id: this.jobIdCounter++,
+        category: this.category,
+        country: this.country,
+        company: this.companyName,
+        location: this.location,
+        description: this.description,
+        applied: false
+      };
+
+      this.jobs.push(newJob);
+      this.updateLocalStorage();
+      this.retrieveData();
+      this.initializeShowDescription();
+    }
+  }
+  
+  updateLocalStorage() {
+    localStorage.setItem('jobPosts', JSON.stringify(this.jobs));
+    localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
+  }
+  
+}
   // ngOnInit(): void {
   //   // Retrieve the userid from the query parameters
   //   // const userIdParam = this.router.snapshot.queryParamMap.get('userid');
@@ -36,56 +132,7 @@ export class JobsComponent implements OnInit {
   // //     // You can choose to handle this case however you see fit
   // //   }
   // }
-  applyOrRedirect(job: any): void {
-    const storedLoginDetails = localStorage.getItem('user');
-
-    if (storedLoginDetails) {
-      const { userId } = JSON.parse(storedLoginDetails);
-
-      if (!this.jobApplications[userId]) {
-        this.jobApplications[userId] = [];
-      }
-
-      this.jobApplications[userId].push(job.id);
-      job.applied = true;
-      this.updateLocalStorage();
-
-    } else {
-      alert('Please login to apply for the job.');
-      this.router.navigate(['/login']);
-    }
-  }
-  addJob() {
-    if (this.category && this.companyName && this.location && this.description) {
-      const newJob = {
-        id: this.jobIdCounter++,
-        category: this.category,
-        country: this.country,
-        company: this.companyName,
-        location: this.location,
-        description: this.description,
-        applied: false
-      };
-
-      this.jobs.push(newJob);
-
-      localStorage.setItem('jobPosts', JSON.stringify(this.jobs));
-      this.retrieveData();
-      this.initializeShowDescription();
-    }
-  }
-
-  
-  ngOnInit() {
-    
-    this.retrieveData();
-    this.retrieveJobApplications();
-    this.initializeShowDescription();
-  }
-
-  initializeShowDescription(): void {
-    this.showDescription = new Array(this.jobs.length).fill(false);
-  }
+ 
 
   // retrieveData() {
   //   const storedJobs = localStorage.getItem('jobPosts');
@@ -93,32 +140,7 @@ export class JobsComponent implements OnInit {
   //     this.jobs = JSON.parse(storedJobs);
   //   }
   // }
-  retrieveData() {
-    const storedJobs = localStorage.getItem('jobPosts');
-    if (storedJobs) {
-      this.jobs = JSON.parse(storedJobs);
-      // Extract job IDs and store them in an array
-      const jobIds = this.jobs.map(job => job.id);
-      console.log('Job IDs:', jobIds); // This will log the array of job IDs
-    }
-  }
-
-  updateLocalStorage(): void {
-    localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
-  }
-
-  retrieveJobApplications(): void {
-    const storedJobApplications = localStorage.getItem('jobApplications');
-    if (storedJobApplications) {
-      this.jobApplications = JSON.parse(storedJobApplications);
-    }
-  }
-
-  toggleDescription(index: number) {
-    this.showDescription[index] = !this.showDescription[index];
-  }
-}
-
+ 
 // retrieveData() {
   //   const storedJobs = localStorage.getItem('jobPosts');
   //   if (storedJobs) {

@@ -1,0 +1,25 @@
+<p>jobapplication works!</p>
+<div class="job-application-container">
+    <h2>Apply for a Job</h2>
+    <div *ngFor="let job of jobs; let i = index" class="job">
+
+      <h3>Title:{{ job.title }}</h3>
+      <p>Description:{{ job.description }}</p>
+      <form (ngSubmit)="applyForJob(i, applicantName.value)">
+        <div class="form-group">
+          <label for="applicantName">Your Name:</label>
+          <input type="text" id="applicantName" name="applicantName" #applicantName required>
+        </div>
+        <button type="submit">Apply</button>
+      </form>
+
+
+      <div *ngIf="job.applicants.length > 0" class="applicants">
+        <h4>Applicants:</h4>
+        <ul>
+          <li *ngFor="let applicant of job.applicants">{{ applicant }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
