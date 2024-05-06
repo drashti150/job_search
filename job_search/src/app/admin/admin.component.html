@@ -36,16 +36,11 @@
         <h2 (click)="toggleRecruiters()">Recruiter List</h2>
       </div>
 
-      <div class="category" *ngIf="isLoggedIn">
-        <h2 (click)="toggleCategories()">Category List</h2>
+      <div class="recruiter" *ngIf="isLoggedIn">
+        <h2 (click)="togglePassword()">Change password</h2>
       </div>
 
-      <div class="job" *ngIf="isLoggedIn">
-        <h2 (click)="toggleJobList()">Job Postings</h2>
-      </div>
     </div>
-
-
 
     <!-- right panel -->
     <div class="right-panel">
@@ -53,28 +48,6 @@
       <div class="recruiter_box">
 
         <div class="recruiter_box" *ngIf="showRecruitersPanel">
-
-          <div>
-            <label for="recruiterName">Recruiter Name:</label>
-            <select id="recruiterName" [(ngModel)]="selectedRecruiterName">
-              <option *ngFor="let recruiter of recruiters" [value]="recruiter.name">{{ recruiter.name }}</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="recruiterCategory">Recruiter Category:</label>
-            <select id="recruiterCategory" [(ngModel)]="selectedRecruiterCategory">
-              <option *ngFor="let category of recruiterCategories" [value]="recruiter.category">{{recruiter.category }}
-              </option>
-            </select>
-          </div>
-          <!-- 
-          <div>
-            <label for="category">Category:</label>
-            <select id="category" [(ngModel)]="selectedRecruiterCategorty">
-              <option *ngFor="let category of categories" [value]="this.recruiter.category">{{this.recruiter.category }}</option>
-            </select>
-          </div> -->
 
           <div class="recruiter">
 
@@ -110,83 +83,35 @@
                 <input type="text" [(ngModel)]="recruiter.category" placeholder="Enter category"
                   [disabled]="editingIndex !== i">
 
-                <button (click)="updateRecruiter()" *ngIf="editingIndex === i">Update</button>
-                <button (click)="editRecruiter(i)" *ngIf="editingIndex !== i">Edit</button>
-                <button (click)="deleteRecruiter(i)">Delete</button>
+                <button (click)="updateRecruiter()" *ngIf="editingIndex === i">UPDATE</button>
+                <button (click)="editRecruiter(i)" *ngIf="editingIndex !== i">EDIT</button>
+                <button (click)="deleteRecruiter(i)">DELETE</button>
+                <button class="block-button" (click)="blockRecruiter(recruiter)"
+                  [ngClass]="{ 'blocked': recruiter.blocked }">
+                  {{ recruiter.blocked ? 'BLOCK' : 'UNBLOCK' }}
+                </button>
 
               </div>
             </div>
           </div>
+          <!--  -->
         </div>
-      </div>
 
+        <div class="recruiter_box" *ngIf="showchangePassword">
 
+          <div class="change-password">
+            <h2>Change Password</h2>
 
-      <!-- category -->
-
-      <!-- <div *ngIf="isLoggedIn">
-        <div *ngIf="showCategoriesPanel">
-           Display recruiters grouped by category -->
-      <!-- <h2>Recruiters by Category</h2>
-          <ul>
-            <li *ngFor="let category of categories">
-              <h3>{{ category }}</h3>
-              <ul>
-                <li *ngFor="let recruiter of getRecruitersByCategory(category)">
-                  {{ recruiter.name }} - {{ recruiter.email }}
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div> -->
-      <div class="recruiter_box" *ngIf="showCategoriesPanel">
-
-        <div class="categories">
-
-          <h1>Category wise Job List</h1>
-
-          <!-- <h2>Add Category</h2> -->
-
-          <div class="category-list">
-
-            <!-- <input type="text" [(ngModel)]="category" placeholder="Enter category"> -->
-            <!-- <button (click)="addCategory()" class="add-button">ADD</button> -->
-
-            <h2 class="section-header">All categories</h2>
-
-            <select id="category-list" (change)="filterByCategory()">
-              <option value="all">All Categories</option>
-              <option *ngFor="let category of categories" [value]="category"> {{ category }}</option>
-            </select>
+            <input type="password" placeholder="Enter current password" [(ngModel)]="currentPassword">
+            <input type="password" placeholder="Enter new password" [(ngModel)]="newPassword">
+            <input type="password" placeholder="Confirm new password" [(ngModel)]="confirmPassword">
+            <button (click)="changePassword()">Change Password</button>
 
           </div>
 
         </div>
+        <!--  -->
 
-      </div>
-
-      <div class="recruiter_box" *ngIf="showJobList">
-
-        <h2>Job List</h2>
-
-        <ul class="job-list">
-
-          <li *ngFor="let job of jobPosts; let i = index">
-
-            <div class="job-container">
-
-              <h2>Title : : {{job.title}}</h2>
-              <p>Category : {{job.category}}</p>
-              <p>Country : {{job.country}}</p>
-              <p>Company : {{job.company}}</p>
-              <p>Location : {{job.location}}</p>
-              <p>Description : {{job.description}}</p>
-
-              <button (click)="deleteJob(i)">Delete</button>
-            </div>
-
-          </li>
-        </ul>
       </div>
     </div>
+  </div>

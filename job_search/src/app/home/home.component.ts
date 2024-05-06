@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     if (!jobApplications[job.id]) {
     }
 
-    jobApplications[2].push(job.id);
+    jobApplications[1].push(job.id);
     localStorage.setItem('jobApplications', JSON.stringify(jobApplications));
   }
 

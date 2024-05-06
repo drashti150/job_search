@@ -1,28 +1,93 @@
-<!-- <p>employee works!</p>
-<div>
-    <label for="userEmail">User Email:</label>
-    <input type="text" id="userEmail" [(ngModel)]="title" placeholder="Enter user email">
-  </div>
-  <div>
-    <label for="category">Category:</label>
-    <input type="text" id="category" [(ngModel)]="description" placeholder="Enter category">
-  </div>
-  <div>
-    <button >Get Applications</button>
-  </div>
-   -->
-   <div class="job-posting-container">
-    <h2>Post a Job</h2>
-    <form (ngSubmit)="postJob()">
-      <div class="form-group">
-        <label for="title">Job Title:</label>
-        <input type="text" id="title" name="title" [(ngModel)]="title" required>
+<h1>Welcome to Recruiter Panel</h1>
+
+<div class="container">
+
+  <div class="left-panel">
+
+    <h1>Recruiter Panel</h1>
+
+    <div class="left-panel">
+      <!-- <div class="recruiter" *ngIf="isLoggedIn"> -->
+
+      <div class="category">
+        <h2 (click)="toggleCategories()">Category List</h2>
       </div>
-      <div class="form-group">
-        <label for="description">Job Description:</label>
-        <textarea id="description" name="description" [(ngModel)]="description" required></textarea>
+
+      <div class="job">
+        <h2 (click)="toggleJobList()">Job List</h2>
       </div>
-      <button type="submit">Post Job</button>
-    </form>
+
+      <div class="user">
+        <h2 (click)="toggleUserList()">User List</h2>
+      </div>
+
+    </div>
   </div>
-  
+
+
+  <div class="right-panel">
+
+    <div class="recruiter_box" *ngIf="showCategoriesPanel">
+
+      <div class="categories">
+
+        <h1>Category wise Job List</h1>
+        <!-- </div> -->
+        <div class="category-list">
+
+          <h2 class="section-header">All categories</h2>
+
+          <select id="category-list" (change)="filterByCategory()">
+            <option value="all">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category"> {{ category }}</option>
+          </select>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- </div> -->
+
+    <div class="recruiter_box" *ngIf="showJobList">
+
+      <h2>Job List</h2>
+
+      <ul class="job-list">
+
+        <li *ngFor="let job of jobPosts; let i = index">
+
+          <div class="job-container">
+            <h2>Id: {{job.id}}</h2>
+            <h2>Title : {{job.title}}</h2>
+            <p>Category : {{job.category}}</p>
+            <p>Country : {{job.country}}</p>
+            <p>Company : {{job.company}}</p>
+            <p>Location : {{job.location}}</p>
+            <p>Description : {{job.description}}</p>
+
+            <button (click)="deleteJob(i)">Delete</button>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+
+    <div class="recruiter_box" *ngIf="showUserList">
+
+      <h2>Job Applications for Job ID: {{ jobId }}</h2>
+      <ul>
+        <li *ngFor="let application of jobApplications; let i = index">
+          <p>User: {{ application.user }}</p>
+          <p>Resume: {{ application.resume }}</p>
+          <button (click)="deleteJobApplication(i)">Delete</button>
+        </li>
+      </ul>
+      <div *ngIf="jobApplications.length === 0">
+        <p>No job applications found.</p>
+      </div>
+    </div>
+  </div>
+</div>

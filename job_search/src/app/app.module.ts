@@ -15,7 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { JobapplicationComponent } from './jobapplication/jobapplication.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { JobapplicationComponent } from './jobapplication/jobapplication.compone
     AboutusComponent,
     FooterComponent,
     LoginComponent,
-    JobapplicationComponent,
   ],
   imports: [
     BrowserModule,

@@ -54,8 +54,24 @@ label {
 
 }
 
+/* CSS */
+.block-button {
+  /* Define default styles for the button */
+  background-color: #007bff;
+  /* Default color */
+  color: #ffffff;
+  /* Text color */
+}
+
+.block-button.blocked {
+  /* Define styles when the recruiter is blocked */
+  background-color: #dc3545;
+  /* Red color */
+}
+
 input[type="username"],
-input[type="password"] {
+input[type="password"],
+.change-password {
   width: 50%;
   padding: 0.5rem;
   border: 1px solid #ccc;
@@ -198,16 +214,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-.job-list {
-  list-style: none;
-  padding: 0;
-}
-
-.job-list li {
-  display: inline-block;
-  margin-right: 20px;
-  vertical-align: top;
-}
 
 @media screen and (min-width: 768px) {
   .container {
