@@ -6,13 +6,13 @@
     <div class="list">
       <!-- <label for="country">Select Country:</label> -->
       <select id="country-list" [(ngModel)]="selectedCountry">
-        <option value="all">All</option>
+        <option value="all">All City</option>
         <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
       </select>
 
       <!-- <label for="category">Select Category:</label> -->
       <select id="category-list" [(ngModel)]="selectedCategory">
-        <option value="all">All</option>
+        <option value="all">All Category</option>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
       </select>
 
@@ -34,7 +34,7 @@
     <p>Description : {{job.description}}</p>
     <button (click)="applyForJob(job)" [disabled]="job.applied">Apply</button>
   </div>
-  
+
 </div>
 
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { SweetalertService } from '../sweetalert.service';
 
 
 @Component({
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class JobsComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private sweetAlertService: SweetalertService) { }
   jobApplications: { [key: number]: number[] } = {};
   jobs: any[] = [];
   category: string = '';
@@ -19,7 +21,7 @@ export class JobsComponent implements OnInit {
   country: any;
   jobIdCounter: number = 1;
   showDescription: boolean[] = new Array(this.jobs.length).fill(false);
-  userId: string = ''; // Initialize with an empty string
+  userId: string = '';
 
 
   ngOnInit(): void {
@@ -77,7 +79,8 @@ export class JobsComponent implements OnInit {
         this.updateLocalStorage();
       }
     } else {
-      alert('Please login to apply for the job.');
+      // alert('Please login to apply for the job.');
+     this.sweetAlertService.showErrorAlert('Oops...','Please login to apply for the job.')
       this.router.navigate(['/login']);
     }
   }
@@ -118,20 +121,6 @@ updateJobStatus(): void {
   }
   
 }
-  // ngOnInit(): void {
-  //   // Retrieve the userid from the query parameters
-  //   // const userIdParam = this.router.snapshot.queryParamMap.get('userid');
-
-  //   // Check if userIdParam is not null before assignment
-  //   // if (userIdParam !== null) {
-  //   //   this.userId = userIdParam;
-  //     console.log('User ID:', this.userId);
-  // //   } else {
-  // //     // Handle the case where userid is not found in the query parameters
-  // //     console.error('User ID not found in query parameters.');
-  // //     // You can choose to handle this case however you see fit
-  // //   }
-  // }
  
 
   // retrieveData() {

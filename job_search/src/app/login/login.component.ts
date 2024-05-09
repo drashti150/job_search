@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { SweetalertService } from '../sweetalert.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent {
   lastUserId: number = parseInt(localStorage.getItem('lastLoginUserId') || '0');
   storedUserDetails: { email: string, userId: number }[] = JSON.parse(localStorage.getItem('storedUserDetails') || '[]');
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private sweetAlertService: SweetalertService) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -30,6 +32,55 @@ export class LoginComponent {
       this.isLoggedIn = true;
     }
   }
+
+  login() {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+  
+      const emailExists = this.storedUserDetails.some(user => user.email === email);
+  
+      if (emailExists) {
+         this.sweetAlertService.showErrorAlert('Oops...','Email already exists. Please use a different email.')
+      
+        // alert('Email already exists. Please use a different email.');
+        return;
+      }
+  
+      this.isLoggedIn = true;
+      this.lastUserId++;
+      localStorage.setItem('lastLoginUserId', this.lastUserId.toString());
+  
+      this.userDetails = {
+        email: email,
+        userId: this.lastUserId
+      };
+  
+      this.storedUserDetails.push(this.userDetails);
+      
+      this.sweetAlertService.showSuccessAlert('Success','Login Successfully.')
+
+      localStorage.setItem('storedUserDetails', JSON.stringify(this.storedUserDetails));
+      
+      // console.log("Login Successfully.");
+      this.router.navigate(['/resumes']);
+  
+      localStorage.setItem('user', JSON.stringify(this.userDetails));
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
+  }
+  
+
+  // logout() {
+  //   this.loginForm.reset();
+  //   this.isLoggedIn = false;
+
+  //   localStorage.removeItem('user');
+  // }
+}
+
+
 
   // login() {
   //   if (this.loginForm.valid) {
@@ -58,52 +109,6 @@ export class LoginComponent {
   //     this.email = '';
   //     this.password = '';
   // }
-  login() {
-    if (this.loginForm.valid) {
-      const email = this.loginForm.value.email;
-      const password = this.loginForm.value.password;
-  
-      // Check if the email already exists in stored user details
-      const emailExists = this.storedUserDetails.some(user => user.email === email);
-  
-      if (emailExists) {
-        alert('Email already exists. Please use a different email.');
-        return;
-      }
-  
-      // If email doesn't exist, proceed with login
-      this.isLoggedIn = true;
-      this.lastUserId++;
-      localStorage.setItem('lastLoginUserId', this.lastUserId.toString());
-  
-      this.userDetails = {
-        email: email,
-        userId: this.lastUserId
-      };
-  
-      this.storedUserDetails.push(this.userDetails);
-      localStorage.setItem('storedUserDetails', JSON.stringify(this.storedUserDetails));
-  
-      console.log("Login Successfully.");
-      this.router.navigate(['/resumes']);
-  
-      localStorage.setItem('user', JSON.stringify(this.userDetails));
-    } else {
-      this.loginForm.markAllAsTouched();
-    }
-  }
-  
-
-  // logout() {
-  //   this.loginForm.reset();
-  //   this.isLoggedIn = false;
-
-  //   localStorage.removeItem('user');
-  // }
-}
-
-
-
 
 //   password: string = '';
 //   userIdCounter: number = 1;

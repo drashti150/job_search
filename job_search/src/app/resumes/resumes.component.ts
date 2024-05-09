@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SweetalertService } from '../sweetalert.service';
 
 @Component({
   selector: 'app-resumes',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class ResumesComponent {
   jobApplicationForm: FormGroup;
 
-  constructor(private fb: FormBuilder , private router: Router) {
+  constructor(private fb: FormBuilder , private router: Router, private seetAlertService: SweetalertService) {
 
     this.jobApplicationForm = this.fb.group({
       fullname: ['', Validators.required],
@@ -41,18 +42,20 @@ export class ResumesComponent {
     jobApplicationData[userId] = formData;
 
     localStorage.setItem('jobApplicationData', JSON.stringify(jobApplicationData));
+    this.seetAlertService.showSuccessAlert('Success','Form data saved locally!')
 
-    alert('Form data saved locally!');
+    // alert('Form data saved locally!');
     this.jobApplicationForm.reset();
   }
 
   onSubmit() {
     if (this.jobApplicationForm.valid) {
       this.saveFormData();
-      this.router.navigate(['/jobs']);
+      this.router.navigate(['/home']);
 
     } else {
-      alert('Please fill in all required fields.');
+      this.seetAlertService.showErrorAlert('Oops...','Please fill in all required fields.')
+      // alert('Please fill in all required fields.');
     }
   }
 }

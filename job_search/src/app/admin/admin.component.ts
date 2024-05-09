@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { SweetalertService } from '../sweetalert.service';
 
 @Component({
   selector: 'app-admin',
@@ -33,7 +35,7 @@ blocked: any;name: string, email: string, category: string
   showchangePassword: boolean = false;
 
   
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,  private sweetAlertService: SweetalertService) {
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -43,21 +45,25 @@ blocked: any;name: string, email: string, category: string
   }
 
     ngOnInit() {
-      this.retrieveData(); // Retrieve existing job posts from localStorage
+      this.retrieveData();
+      
       }
       login() {
         if (this.loginForm.valid) {
           const username = this.loginForm.value.username;
           const password = this.loginForm.value.password;
       
-          // Replace 'admin' and 'password' with the values entered by the user
-          if (username.trim() === 'admin' && password.trim() === 'password') {
-            alert('Login successful');
+          if (username.trim() === 'admin' && password.trim() === '1234') {
+
+            this.sweetAlertService.showSuccessAlert('Success..','Login Successfully.');
+
             this.isLoggedIn = true;
+
           } else {
-            alert('Invalid username or password');
-          }
-      
+
+            this.sweetAlertService.showErrorAlert('Oops...','Invalid username or password.');
+           
+          }      
           this.loginForm.reset();
         } else {
           this.loginForm.markAllAsTouched();
@@ -98,7 +104,12 @@ blocked: any;name: string, email: string, category: string
       this.isEditing = true;
 
     } else {
-      console.error('Recruiter not found!');
+      this.sweetAlertService.showErrorAlert('Oops...','Recruiter not Found.');
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Oops...',
+      //   text: 'Recruiter not found.'
+      // });
     }
   }
 
@@ -148,7 +159,9 @@ blocked: any;name: string, email: string, category: string
     const recruiter = this.recruiters[this.editingIndex];
   
     if (recruiter.blocked) {
-      alert("Recruiter is blocked. Cannot update details.");
+      // alert("Recruiter is blocked. Cannot update details.");
+      this.sweetAlertService.showErrorAlert('Oops...','Recruiter is blocked. Cannot update details.');
+
       return;
     }
   
@@ -166,6 +179,24 @@ blocked: any;name: string, email: string, category: string
   
   deleteRecruiter(index: number) {
     this.recruiters.splice(index, 1);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
 
     this.storeData();
   }
@@ -191,7 +222,7 @@ blocked: any;name: string, email: string, category: string
   }
  blockRecruiter(recruiter: any) {
   recruiter.blocked = !recruiter.blocked;
-  this.storeData(); // Save the changes to localStorage or backend
+  this.storeData(); 
 }
 
   // addRecruiter() {
@@ -212,7 +243,9 @@ blocked: any;name: string, email: string, category: string
       // Check if the recruiter already exists
       const existingRecruiter = this.recruiters.find(recruiter => recruiter.email === this.recruiterEmail);
       if (existingRecruiter) {
-        alert("Recruiter with the same email already exists.");
+        // alert("Recruiter with the same email already exists.");      
+        this.sweetAlertService.showErrorAlert('Oops...','Recruiter with the same email already exists.');
+
         return;
       }
   
@@ -232,7 +265,9 @@ blocked: any;name: string, email: string, category: string
   changePassword(){
 
     if (this.newPassword === this.confirmPassword) {
-      console.log('Password changed successfully.');
+      this.sweetAlertService.showSuccessAlert('Success','Password changed successfully.');
+      
+      // console.log('Password changed successfully.');
       // Reset form fields
       this.currentPassword = '';
       this.newPassword = '';

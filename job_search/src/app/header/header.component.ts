@@ -17,6 +17,6 @@ export class HeaderComponent {
     this.isLoggedIn = false;
 
     localStorage.removeItem('user');
-    this.router.navigate(['/jobs']);
+    this.router.navigate(['/home']);
   }
 }

@@ -27,13 +27,13 @@
 
   <div class="right-panel">
 
-    <div class="recruiter_box" *ngIf="showCategoriesPanel">
-
+    <!-- <div class="recruiter_box" *ngIf="showCategoriesPanel">
+<h1>Add category </h1>
       <div class="categories">
 
         <h1>Category wise Job List</h1>
         <!-- </div> -->
-        <div class="category-list">
+    <!-- <div class="category-list">
 
           <h2 class="section-header">All categories</h2>
 
@@ -41,7 +41,28 @@
             <option value="all">All Categories</option>
             <option *ngFor="let category of categories" [value]="category"> {{ category }}</option>
           </select>
+        </div>
+          <form (ngSubmit)="addCategory()">
+            <input type="text" [(ngModel)]="newCategory" placeholder="Enter new category">
+            <button type="submit">Add</button>
+        </form>
+        </div>
 
+      </div> -->
+    <!-- </div> -->
+    <div class="recruiter_box" *ngIf="showCategoriesPanel">
+      <h1>Add category </h1>
+      <input type="text" [(ngModel)]="newCategory" placeholder="Enter new category">
+      <button (click)="addCategory()" type="submit">Add</button>
+
+      <div class="categories">
+        <h1>Category wise Job List</h1>
+        <div class="category-list">
+          <h2 class="section-header">All categories</h2>
+          <select id="category-list" (change)="filterByCategory()">
+            <option value="all">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
         </div>
 
       </div>
@@ -73,6 +94,15 @@
 
         </li>
       </ul>
+
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" [(ngModel)]="newJob.title" required>
+
+      <label for="company">Company:</label>
+      <input type="text" id="company" name="company" [(ngModel)]="newJob.company" required>
+
+      <button type="submit" (click)="addJobPost()">Add Job Post</button>
+
     </div>
 
     <div class="recruiter_box" *ngIf="showUserList">
@@ -90,4 +120,3 @@
       </div>
     </div>
   </div>
-</div>

@@ -7,12 +7,15 @@ import { Component } from '@angular/core';
 })
 
 export class EmployeeComponent {
+  // submitJobPost() {
+  // throw new Error('Method not implemented.');
+  // }
   showCategoriesPanel: boolean = false;
   selectedJob: any;
   showRightPanel: boolean = false;
   selectedJobIndex: number | null = null;
   showJobList: boolean = false;
-  jobs: any;
+  jobs: any = [];
   editingCategoryIndex: number | null = null;
   category: any;
   countryName: any;
@@ -26,52 +29,53 @@ export class EmployeeComponent {
   index: any = '';
   isEditing: any = '';
   showCategoryPanel: boolean = false;
-  jobId: string = ''; // Assuming you have a way to get the jobId in your component
+  jobId: string = '';
   showUserList: boolean = false;
+  newCategory: string = '';
+  newJob: any = {};
 
   // ngOnInit() {
   //   // Set ids for job posts
   //   this.jobPosts.forEach((job: { id: number; }) => {
   //     job.id = this.jobIdCounter++;
   //   });
-  
+
   //    this.retrieveData();
   //     // const storedCounter = localStorage.getItem('jobIdCounter');
   //     // this.jobIdCounter = storedCounter ? parseInt(storedCounter, 10) : 1;
   //   }
-   
+
   ngOnInit(): void {
     this.jobPosts.forEach((job: { id: number; }) => {
       job.id = this.jobIdCounter++;
     });
-      const storedJobApplications = localStorage.getItem('jobApplications');
-      if (storedJobApplications) {
-        const parsedData = JSON.parse(storedJobApplications);
+    const storedJobApplications = localStorage.getItem('jobApplications');
+    if (storedJobApplications) {
+      const parsedData = JSON.parse(storedJobApplications);
       this.jobApplications = JSON.parse(storedJobApplications);
 
-        if (Array.isArray(parsedData)) {
-          this.jobApplications = parsedData;
-          // If stored data is not an array, handle it accordingly
-          console.error('Stored jobApplications data is not an array.');
-        }
+      if (Array.isArray(parsedData)) {
+        this.jobApplications = parsedData;
+        // If stored data is not an array, handle it accordingly
+        console.error('Stored jobApplications data is not an array.');
+      }
     }
-    
-     this.retrieveData();
+
+    this.retrieveData();
   }
 
   viewJobApplications(jobId: string) {
     this.jobId = jobId;
-   
+
     localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
   }
 
   deleteJobApplication(index: number) {
     this.jobApplications.splice(index, 1);
-    // Update local storage after deletion
     localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
   }
 
-  togglePanel(showCategories: boolean, showJobList: boolean,showUserList: boolean) {
+  togglePanel(showCategories: boolean, showJobList: boolean, showUserList: boolean) {
     this.showCategoriesPanel = showCategories;
     this.showJobList = showJobList;
     this.showUserList = showUserList;
@@ -82,20 +86,20 @@ export class EmployeeComponent {
   }
 
   toggleJobList() {
-    this.togglePanel( false, true, false);
-  }
-  
-  toggleUserList(){
-    this.togglePanel( false,false,  true);
+    this.togglePanel(false, true, false);
   }
 
-   toggleCategoryPanel() {
+  toggleUserList() {
+    this.togglePanel(false, false, true);
+  }
+
+  toggleCategoryPanel() {
     this.showCategoryPanel = !this.showCategoryPanel;
   }
 
-  
+
   retrieveData() {
-  
+
     const storedCountries = localStorage.getItem('countries');
     if (storedCountries) {
       this.countries = JSON.parse(storedCountries);
@@ -122,13 +126,13 @@ export class EmployeeComponent {
     }
   }
 
-  // // job post
   categories = [
     "Flutter",
     "Web developer",
     "Web design",
     "Marketing",
     "UI/UX Designer",
+    "Sales"
   ];
 
   countries = [
@@ -141,47 +145,53 @@ export class EmployeeComponent {
   ];
 
   jobPosts = [
-    {"id": 1,
+    {
+      "id": 1,
       "title": 'UI/UX Designer',
       "company": 'Company ABC',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'Flutter'
-    }, 
-    {"id": 2,
+    },
+    {
+      "id": 2,
       "title": 'UI/UX Designer',
       "company": 'Company XYZ',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'UI/UX Designer'
-  }, 
-    {"id": 3,
-    "title": 'UI/UX Designer',
+    },
+    {
+      "id": 3,
+      "title": 'UI/UX Designer',
       "company": 'Company DEF',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'Web design'
-    }, 
-    {"id": 4,
+    },
+    {
+      "id": 4,
       "title": 'UI/UX Designer',
       "company": 'Company ABCD',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'Web developer'
-    }, 
-    {"id": 5,
+    },
+    {
+      "id": 5,
       "title": 'UI/UX Designer',
       "company": 'Company EFG',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Gujarat',
       "category": 'Marketing'
-    }, 
-    {"id": 6,
+    },
+    {
+      "id": 6,
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
@@ -189,7 +199,8 @@ export class EmployeeComponent {
       "country": 'Jaipur',
       "category": 'UI/UX Designer'
     },
-    {"id": 7,
+    {
+      "id": 7,
       "title": "UI/UX Designer",
       "company": "Design Co.",
       "location": "Sarthana",
@@ -197,8 +208,9 @@ export class EmployeeComponent {
       "category": "UI/UX Designer",
       "country": 'Mumbai'
 
-    }, 
-    {"id": 8,
+    },
+    {
+      "id": 8,
       "title": 'UI/UX Designer',
       "company": 'Company ABC',
       "location": 'Location X',
@@ -206,7 +218,8 @@ export class EmployeeComponent {
       "country": 'Mumbai',
       "category": 'UI/UX Designer'
     },
-    {"id": 9,
+    {
+      "id": 9,
       "title": 'UI/UX Designer',
       "company": 'system',
       "location": 'Location X',
@@ -214,7 +227,8 @@ export class EmployeeComponent {
       "country": 'Kolkata',
       "category": 'UI/UX Designer'
     },
-    {"id": 10,
+    {
+      "id": 10,
       "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
@@ -222,7 +236,8 @@ export class EmployeeComponent {
       "country": 'Bangalore',
       "category": 'UI/UX Designer'
     },
-    {"id": 11,
+    {
+      "id": 11,
       "title": "Flutter",
       "company": "Data Insights Inc.",
       "location": "Motavarachha",
@@ -231,7 +246,8 @@ export class EmployeeComponent {
       "country": 'Jaipur'
 
     },
-    {"id": 12,
+    {
+      "id": 12,
       "title": "Flutter",
       "company": "Data Insights Inc.",
       "location": "Motavarachha",
@@ -240,7 +256,8 @@ export class EmployeeComponent {
       "country": 'Mumbai'
 
     },
-    {"id": 13,
+    {
+      "id": 13,
       "title": "Flutter",
       "company": "Data Insights Inc.",
       "location": "Motavarachha",
@@ -249,7 +266,8 @@ export class EmployeeComponent {
       "country": 'Kolkata'
 
     },
-    {"id": 14,
+    {
+      "id": 14,
       "title": 'Web design',
       "company": 'xyz',
       "location": 'Adajan',
@@ -258,7 +276,8 @@ export class EmployeeComponent {
       "category": 'Web design',
 
     },
-    {"id": 15,
+    {
+      "id": 15,
       "title": 'Web developer',
       "company": 'abc',
       "location": 'LalDarwaja',
@@ -266,27 +285,58 @@ export class EmployeeComponent {
       "country": 'Kolkata',
       "category": 'Web developer',
     },
-    {"id": 16,
+    {
+      "id": 16,
       "title": 'Web developer',
       "company": 'abcd',
       "location": 'Varachha',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
       "country": 'Mumbai',
       "category": 'Web developer',
+    },
+    {
+      "id": 16,
+      "title": 'Web design',
+      "company": '1234',
+      "location": 'Varachha',
+      "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
+      "country": 'Kolkata',
+      "category": 'Web design',
     }
+
 
   ];
 
-  addJobPost(job: any) {
-    job.id = this.jobIdCounter;
-    this.jobIdCounter++; // Increment the counter after assigning the ID
-    this.jobPosts.push(job);
+
+  addJobPost() {
+    this.newJob.id = this.jobIdCounter++;
+    this.jobPosts.push(this.newJob);
     this.storeData();
+    this.newJob = {};
   }
+  // }
+  //   addJobPost(job: any) {
+  //     job.id = this.jobIdCounter;
+  //     this.jobIdCounter++; 
+  //     this.jobPosts.push(job);
+  //     this.storeData();
+  //   }
+
   deleteJob(index: number) {
     this.jobPosts.splice(index, 1);
 
     this.storeData();
+  }
+
+
+  addCategory() {
+    if (this.newCategory.trim() !== '') {
+
+      this.categories.push(this.newCategory);
+      this.storeData();
+      this.newCategory = '';
+
+    }
   }
 
   storeData() {
