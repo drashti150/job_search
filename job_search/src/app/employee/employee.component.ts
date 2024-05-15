@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { SweetalertService } from '../sweetalert.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-employee',
@@ -7,9 +10,18 @@ import { Component } from '@angular/core';
 })
 
 export class EmployeeComponent {
-  // submitJobPost() {
-  // throw new Error('Method not implemented.');
-  // }
+  loginForm: any;
+  isLoggedIn: boolean = false ;
+
+  constructor(private sweetAlertService: SweetalertService , private formBuilder: FormBuilder) {
+    
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+
+    });
+   }
+
   showCategoriesPanel: boolean = false;
   selectedJob: any;
   showRightPanel: boolean = false;
@@ -34,22 +46,13 @@ export class EmployeeComponent {
   newCategory: string = '';
   newJob: any = {};
 
-  // ngOnInit() {
-  //   // Set ids for job posts
-  //   this.jobPosts.forEach((job: { id: number; }) => {
-  //     job.id = this.jobIdCounter++;
-  //   });
-
-  //    this.retrieveData();
-  //     // const storedCounter = localStorage.getItem('jobIdCounter');
-  //     // this.jobIdCounter = storedCounter ? parseInt(storedCounter, 10) : 1;
-  //   }
-
   ngOnInit(): void {
     this.jobPosts.forEach((job: { id: number; }) => {
       job.id = this.jobIdCounter++;
     });
+
     const storedJobApplications = localStorage.getItem('jobApplications');
+
     if (storedJobApplications) {
       const parsedData = JSON.parse(storedJobApplications);
       this.jobApplications = JSON.parse(storedJobApplications);
@@ -64,22 +67,49 @@ export class EmployeeComponent {
     this.retrieveData();
   }
 
-  viewJobApplications(jobId: string) {
-    this.jobId = jobId;
+  
+  login() {
+    if (this.loginForm.valid) {
+      const username = this.loginForm.value.username;
+      const password = this.loginForm.value.password;
+  
+      if (username.trim() === 'recruiter' && password.trim() === '1234') {
 
-    localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
+        this.sweetAlertService.showSuccessAlert('Success..','Login Successfully.');
+
+        this.isLoggedIn = true;
+
+      } else {
+
+        this.sweetAlertService.showErrorAlert('Oops...','Invalid username or password.');
+       
+      }      
+      this.loginForm.reset();
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
   }
+
+  viewJobApplications(jobId: string) {
+
+    this.jobId = jobId;
+    localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
+
+  }
+
 
   deleteJobApplication(index: number) {
     this.jobApplications.splice(index, 1);
     localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
   }
 
+
   togglePanel(showCategories: boolean, showJobList: boolean, showUserList: boolean) {
     this.showCategoriesPanel = showCategories;
     this.showJobList = showJobList;
     this.showUserList = showUserList;
   }
+
 
   toggleCategories() {
     this.togglePanel(true, false, false);
@@ -119,11 +149,13 @@ export class EmployeeComponent {
 
   filterByCategory(): void {
     const selectedCategory = (document.getElementById('category-list') as HTMLSelectElement).value;
+
     if (selectedCategory === 'all') {
       console.log('Filtering job listings by all categories');
     } else {
       console.log('Filtering job listings by category:', selectedCategory);
     }
+
   }
 
   categories = [
@@ -314,20 +346,21 @@ export class EmployeeComponent {
     this.storeData();
     this.newJob = {};
   }
-  // }
-  //   addJobPost(job: any) {
-  //     job.id = this.jobIdCounter;
-  //     this.jobIdCounter++; 
-  //     this.jobPosts.push(job);
-  //     this.storeData();
-  //   }
 
-  deleteJob(index: number) {
-    this.jobPosts.splice(index, 1);
+  async deleteJob(index: number) {
+    const confirmed = this.sweetAlertService.showConfirmationDialog(
+      'Delete for Job',
+      'Are you sure you want to delete this job?'
+    );
 
+    if (await confirmed) {
+      this.jobPosts.splice(index, 1);
+    } else {
+      console.log('Deletion cancelled by user.');
+    }
     this.storeData();
-  }
 
+  }
 
   addCategory() {
     if (this.newCategory.trim() !== '') {
@@ -352,3 +385,26 @@ export class EmployeeComponent {
     }
   }
 }
+
+
+
+// }
+//   addJobPost(job: any) {
+//     job.id = this.jobIdCounter;
+//     this.jobIdCounter++;
+//     this.jobPosts.push(job);
+//     this.storeData();
+//   }
+
+// deleteJob(index: number) {
+//   const confirmed =  this.sweetAlertService.showConfirmationDialog(
+//     'Delete for Job',
+//     'Are you sure you want to delete this job?'
+//   );
+
+//   this.jobPosts.splice(index, 1);
+
+//   this.storeData();
+// }
+
+

@@ -19,9 +19,7 @@ export class AdminComponent {
   recruiterName: any = '';
   recruiterEmail: any = '';
   recruiterCategory: any = '';
-  recruiters: {
-blocked: any;name: string, email: string, category: string 
-}[] = [];
+  recruiters: { blocked: any;name: string, email: string, category: string}[] = [];
   editingIndex: number | null = null;
   index: any = '';
   isEditing: any = '';
@@ -46,8 +44,8 @@ blocked: any;name: string, email: string, category: string
 
     ngOnInit() {
       this.retrieveData();
-      
       }
+
       login() {
         if (this.loginForm.valid) {
           const username = this.loginForm.value.username;
@@ -105,14 +103,171 @@ blocked: any;name: string, email: string, category: string
 
     } else {
       this.sweetAlertService.showErrorAlert('Oops...','Recruiter not Found.');
-      // Swal.fire({
-      //   icon: 'error',
-      //   title: 'Oops...',
-      //   text: 'Recruiter not found.'
-      // });
     }
   }
 
+  updateRecruiter() {
+    if (this.editingIndex === null) {
+      alert("Index is null.");
+      return;
+    }
+  
+    const recruiter = this.recruiters[this.editingIndex];
+  
+    if (recruiter.blocked) {
+      // alert("Recruiter is blocked. Cannot update details.");
+      this.sweetAlertService.showErrorAlert('Oops...','Recruiter is blocked. Cannot update details.');
+      return;
+    }
+  
+    recruiter.name = this.recruiterName;
+    recruiter.email = this.recruiterEmail;
+    recruiter.category = this.recruiterCategory;
+  
+    this.storeData();
+  
+    this.resetFields();
+  
+    // Set editingIndex to null to indicate we are no longer editing
+    this.editingIndex = null;
+  }
+ 
+    async deleteRecruiter(index: number) {
+      const confirmed = this.sweetAlertService.showConfirmationDialog(
+        'Delete for Job',
+        'Are you sure you want to delete this job?'
+      );
+    
+      if (await confirmed) {
+        this.recruiters.splice(index, 1);
+      } else {
+        console.log('Deletion cancelled by user.');
+      }
+    this.storeData();
+
+    }
+    
+    // Swal.fire({
+    //   title: "Are you sure?",
+    //   text: "You won't be able to revert this!",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: "Yes, delete it!"
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     Swal.fire({
+    //       title: "Deleted!",
+    //       text: "Your file has been deleted.",
+    //       icon: "success"
+    //     });
+    //   }
+    // });
+
+
+
+  retrieveData() {
+  
+    const storedRecruiters = localStorage.getItem('recruiters');
+    if (storedRecruiters) {
+      this.recruiters = JSON.parse(storedRecruiters);
+    }
+  }
+
+  storeData() {
+    localStorage.setItem('recruiters', JSON.stringify(this.recruiters));   
+  }
+
+  retrieveJobApplications(): void {
+    const storedJobApplications = localStorage.getItem('jobApplications');
+    if (storedJobApplications) {
+      this.jobApplications = JSON.parse(storedJobApplications);
+    }
+  }
+   
+  blockRecruiter(recruiter: any) {
+        recruiter.blocked = !recruiter.blocked;
+        this.storeData(); 
+}
+
+  addRecruiter() {
+    if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
+      // Check if the recruiter already exists
+      const existingRecruiter = this.recruiters.find(recruiter => recruiter.email === this.recruiterEmail);
+      if (existingRecruiter) {
+        // alert("Recruiter with the same email already exists.");      
+        this.sweetAlertService.showErrorAlert('Oops...','Recruiter with the same email already exists.');
+
+        return;
+      }
+  
+      // Add the new recruiter
+      this.recruiters.push({
+        name: this.recruiterName,
+        email: this.recruiterEmail,
+        category: this.recruiterCategory,
+        blocked: undefined
+      });
+  
+      this.storeData(); 
+      this.resetFields(); // Reset input fields
+    }
+  }
+  changePassword() {
+    var email = prompt("Please enter your email address to reset your password:");
+  
+    if (email) {
+      var newPassword = this.generateNewPassword();
+  
+      localStorage.setItem('password', newPassword);
+      localStorage.setItem('email', email);
+  
+      alert("Password reset instructions have been sent to: " + email);
+    } else {
+      alert("Password reset canceled.");
+      return; // Exit function if email is not provided
+    }
+  
+    // Check if new password matches confirm password
+    if (this.newPassword === this.confirmPassword) {
+      // Passwords match, proceed with password change
+      this.sweetAlertService.showSuccessAlert('Success','Password changed successfully.');
+      
+      // Reset form fields
+      this.currentPassword = '';
+      this.newPassword = '';
+      this.confirmPassword = '';
+    } else {
+      // Passwords do not match
+      console.log('New password and confirm password do not match.');
+      // Optionally, you can show an error message to the user
+    }
+  }
+  
+  
+  generateNewPassword() {
+    var newPassword = Math.random().toString(36).slice(-8); 
+    return newPassword;
+  }
+  
+}
+
+
+
+  // addRecruiter() {
+  //   if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
+  //     this.recruiters.push({
+  //       name: this.recruiterName,
+  //       email: this.recruiterEmail,
+  //       category: this.recruiterCategory
+  //     });
+
+  //     this.storeData();
+
+  //     this.resetFields();
+  //   }
+  // }
   // updateRecruiter() {
   //   if (this.index === null) {
   //     alert("Index is null.");
@@ -150,133 +305,6 @@ blocked: any;name: string, email: string, category: string
   
   //   this.resetFields();
   // }
-  updateRecruiter() {
-    if (this.editingIndex === null) {
-      alert("Index is null.");
-      return;
-    }
-  
-    const recruiter = this.recruiters[this.editingIndex];
-  
-    if (recruiter.blocked) {
-      // alert("Recruiter is blocked. Cannot update details.");
-      this.sweetAlertService.showErrorAlert('Oops...','Recruiter is blocked. Cannot update details.');
-
-      return;
-    }
-  
-    recruiter.name = this.recruiterName;
-    recruiter.email = this.recruiterEmail;
-    recruiter.category = this.recruiterCategory;
-  
-    this.storeData();
-  
-    this.resetFields();
-  
-    // Set editingIndex to null to indicate we are no longer editing
-    this.editingIndex = null;
-  }
-  
-  deleteRecruiter(index: number) {
-    this.recruiters.splice(index, 1);
-
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
-      }
-    });
-
-    this.storeData();
-  }
-
-  retrieveData() {
-  
-    const storedRecruiters = localStorage.getItem('recruiters');
-    if (storedRecruiters) {
-      this.recruiters = JSON.parse(storedRecruiters);
-    }
-  }
-
-  storeData() {
-    localStorage.setItem('recruiters', JSON.stringify(this.recruiters));
-   
-  }
-
-  retrieveJobApplications(): void {
-    const storedJobApplications = localStorage.getItem('jobApplications');
-    if (storedJobApplications) {
-      this.jobApplications = JSON.parse(storedJobApplications);
-    }
-  }
- blockRecruiter(recruiter: any) {
-  recruiter.blocked = !recruiter.blocked;
-  this.storeData(); 
-}
-
-  // addRecruiter() {
-  //   if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
-  //     this.recruiters.push({
-  //       name: this.recruiterName,
-  //       email: this.recruiterEmail,
-  //       category: this.recruiterCategory
-  //     });
-
-  //     this.storeData();
-
-  //     this.resetFields();
-  //   }
-  // }
-  addRecruiter() {
-    if (this.recruiterName && this.recruiterEmail && this.recruiterCategory) {
-      // Check if the recruiter already exists
-      const existingRecruiter = this.recruiters.find(recruiter => recruiter.email === this.recruiterEmail);
-      if (existingRecruiter) {
-        // alert("Recruiter with the same email already exists.");      
-        this.sweetAlertService.showErrorAlert('Oops...','Recruiter with the same email already exists.');
-
-        return;
-      }
-  
-      // Add the new recruiter
-      this.recruiters.push({
-        name: this.recruiterName,
-        email: this.recruiterEmail,
-        category: this.recruiterCategory,
-        blocked: undefined
-      });
-  
-      this.storeData(); 
-      this.resetFields(); // Reset input fields
-    }
-  }
-  
-  changePassword(){
-
-    if (this.newPassword === this.confirmPassword) {
-      this.sweetAlertService.showSuccessAlert('Success','Password changed successfully.');
-      
-      // console.log('Password changed successfully.');
-      // Reset form fields
-      this.currentPassword = '';
-      this.newPassword = '';
-      this.confirmPassword = '';
-    } else {
-      console.log('New password and confirm password do not match.');
-    }
-  }
-}
 //   isLoggedIn: boolean = false;
 //   loginForm: FormGroup;
 //   showRecruitersPanel: boolean = false;

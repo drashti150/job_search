@@ -71,7 +71,47 @@ export class HomeComponent implements OnInit {
   onSearch(): void {
     this.filterJobPosts();
   }
-  // applyForJob(job: any): void {
+ 
+
+applyForJob(job: any): void {
+  const storedLoginDetails = localStorage.getItem('user');
+
+  if (storedLoginDetails) {
+    const { userId } = JSON.parse(storedLoginDetails);
+    const userAppliedJobs = this.jobApplications[1] || [];
+
+    if (userAppliedJobs.includes(job.id)) {
+      // If job is already applied, remove the application
+      const index = userAppliedJobs.indexOf(job.id);
+      if (index !== -1) {
+      this.jobApplications[1].push(job.id);
+
+        userAppliedJobs.splice(index, 1);
+        job.applied = false;
+        this.updateLocalStorage();
+      }
+    } else {
+      userAppliedJobs.push(job.id);
+      job.applied = true;
+      this.jobApplications[userId] = userAppliedJobs;
+      this.updateLocalStorage();
+    }
+  
+  } else {
+    // alert('Please login to apply for the job.');
+    this.sweetAlertService.showErrorAlert('Oops...', 'Please login to apply for the job.');
+
+    this.router.navigate(['/login']);
+  }
+}
+
+private updateLocalStorage(): void {
+  localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
+}
+}
+
+
+ // applyForJob(job: any): void {
 //     console.log('Applying for job: ', job.category);
 //     job.applied = true;
 
@@ -129,48 +169,6 @@ export class HomeComponent implements OnInit {
 //   }
 // }
 
-
-applyForJob(job: any): void {
-  const storedLoginDetails = localStorage.getItem('user');
-
-  if (storedLoginDetails) {
-    const { userId } = JSON.parse(storedLoginDetails);
-    const userAppliedJobs = this.jobApplications[1] || [];
-
-    if (userAppliedJobs.includes(job.id)) {
-      // If job is already applied, remove the application
-      const index = userAppliedJobs.indexOf(job.id);
-      if (index !== -1) {
-  this.jobApplications[1].push(job.id);
-
-        userAppliedJobs.splice(index, 1);
-        job.applied = false;
-        this.updateLocalStorage();
-      }
-    } else {
-      userAppliedJobs.push(job.id);
-      job.applied = true;
-      this.jobApplications[userId] = userAppliedJobs;
-      this.updateLocalStorage();
-    }
-  
-  } else {
-    // alert('Please login to apply for the job.');
-    this.sweetAlertService.showErrorAlert('Oops...', 'Please login to apply for the job.');
-
-    // Swal.fire({
-    //   icon: 'error',
-    //   title: 'Oops...',
-    //   text: 'Please login to apply for the job.'
-    // });
-    this.router.navigate(['/login']);
-  }
-}
-
-private updateLocalStorage(): void {
-  localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
-}
-}
 
   //     console.log('Applying for job: ', job.category);
   //     job.applied = true;

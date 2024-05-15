@@ -29,6 +29,19 @@
 }
 
 
+.login-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Style for Forgot Password link */
+.forgot-password-link {
+  display: block;
+  margin-top: 10px;
+  color: #005eff;
+  text-decoration: none;
+}
+
 /* Left panel styles */
 .left-panel {
   /* flex: 1; */
@@ -56,17 +69,12 @@ label {
 
 /* CSS */
 .block-button {
-  /* Define default styles for the button */
   background-color: #007bff;
-  /* Default color */
   color: #ffffff;
-  /* Text color */
 }
 
 .block-button.blocked {
-  /* Define styles when the recruiter is blocked */
   background-color: #dc3545;
-  /* Red color */
 }
 
 input[type="username"],

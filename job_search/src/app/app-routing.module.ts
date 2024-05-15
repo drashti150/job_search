@@ -11,7 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { JobPipe } from './job.pipe';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'admin', component: AdminComponent },
   { path: 'resumes', component: ResumesComponent },
   { path: 'home', component: HomeComponent },
@@ -19,10 +19,6 @@ const routes: Routes = [
   { path: 'jobs', component: JobsComponent },
   { path: 'employers', component: EmployeeComponent },
   { path: 'login', component: LoginComponent },
-
-
-
-
 ];
 
 @NgModule({

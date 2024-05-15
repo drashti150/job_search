@@ -90,13 +90,11 @@ input[type="submit"]:hover {
   text-align: left;
   display: inline-block;
   height: 315px;
-
 }
 
-.job p {
+.job-post p {
   color: rgb(92, 92, 96);
   text-align: left;
-
 }
 
 .apply-button {
