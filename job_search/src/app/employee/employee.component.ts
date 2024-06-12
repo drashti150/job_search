@@ -179,7 +179,6 @@ export class EmployeeComponent {
   jobPosts = [
     {
       "id": 1,
-      "title": 'UI/UX Designer',
       "company": 'Company ABC',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
@@ -188,7 +187,6 @@ export class EmployeeComponent {
     },
     {
       "id": 2,
-      "title": 'UI/UX Designer',
       "company": 'Company XYZ',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
@@ -197,7 +195,6 @@ export class EmployeeComponent {
     },
     {
       "id": 3,
-      "title": 'UI/UX Designer',
       "company": 'Company DEF',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
@@ -206,7 +203,6 @@ export class EmployeeComponent {
     },
     {
       "id": 4,
-      "title": 'UI/UX Designer',
       "company": 'Company ABCD',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
@@ -215,7 +211,6 @@ export class EmployeeComponent {
     },
     {
       "id": 5,
-      "title": 'UI/UX Designer',
       "company": 'Company EFG',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",
@@ -224,7 +219,6 @@ export class EmployeeComponent {
     },
     {
       "id": 6,
-      "title": 'UI/UX Designer',
       "company": 'Company A',
       "location": 'Location X',
       "description": "We are looking for a skilled Frontend Developer to join our team. You will be responsible for creating responsive and user-friendly web applications using HTML, CSS, and JavaScript.",

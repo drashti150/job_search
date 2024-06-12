@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,13 +6,14 @@ import { Injectable } from '@angular/core';
 })
 export class JobService { 
 private jobs: { title: string, description: string, applicants: string[] }[] = [];
+private apiUrl = 'path-to-your-api'; // Replace with the actual API URL
 
-constructor() { 
+
+constructor(private http: HttpClient) { 
   // Retrieve jobs from local storage when the service is instantiated
   const storedJobs = localStorage.getItem('jobs');
     this.jobs = storedJobs ? JSON.parse(storedJobs) : [];
-  }
-
+}
   postJob(title: string, description: string) {
     this.jobs.push({ title, description, applicants: [] });
     this.saveJobsToLocalStorage();
@@ -51,4 +53,9 @@ constructor() {
   logout(): void {
     this.isLoggedIn = false;
   }
+  
+// updatePassword(newPassword: string):void{
+//   return this.http.post(`${this.apiUrl}/update-password`, { password: newPassword });
+// }
 }
+

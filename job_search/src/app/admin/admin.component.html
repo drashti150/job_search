@@ -1,6 +1,7 @@
-<h1>Welcome to Admin Panel</h1>
+  <h1>Welcome to Admin Panel</h1>
 
 <div *ngIf="!isLoggedIn">
+  <body>
 
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="login">
@@ -18,13 +19,14 @@
       </div>
 
       <button type="submit">Login</button>
-      <a href="#" class="forgot-password-link" (click)="changePassword()">Forgot Password?</a>
+      <!-- <a href="#" class="forgot-password-link" (click)="changePassword()">Forgot Password?</a> -->
 
     </div>
 
   </form>
-</div>
+</body>
 
+</div>
 
 <div *ngIf="isLoggedIn">
 
@@ -117,3 +119,4 @@
       </div>
     </div>
   </div>
+</div>

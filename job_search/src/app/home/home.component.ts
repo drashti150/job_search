@@ -84,7 +84,7 @@ applyForJob(job: any): void {
       // If job is already applied, remove the application
       const index = userAppliedJobs.indexOf(job.id);
       if (index !== -1) {
-      this.jobApplications[1].push(job.id);
+      this.jobApplications[userId].push(job.id);
 
         userAppliedJobs.splice(index, 1);
         job.applied = false;

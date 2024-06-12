@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
   font-family: "Comic Sans MS", cursive;
   margin: 0;
@@ -14,6 +15,10 @@ body {
   max-width: 400px;
 }
 
+h1{
+  text-align: center;
+  /* margin-bottom: 150px; */
+}
 .card {
   width: 100%;
   max-width: 400px;
@@ -21,7 +26,7 @@ body {
   padding: 30px;
   border-radius: 8px;
   position: absolute;
-  top: 50%;
+  /* top: 50%; */
   left: 50%;
   border: 3px solid black;
   transform: translate(-50%, -50%);
@@ -64,4 +69,39 @@ button {
 
 button:hover {
   background-color: #e63900;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .card {
+    padding: 20px;
+  }
+
+  input {
+    padding: 8px;
+  }
+
+  button {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 35px;
+    width: 70%;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  input {
+    padding: 6px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 8px;
+  }
 }

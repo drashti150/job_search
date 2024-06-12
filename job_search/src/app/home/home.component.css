@@ -1,8 +1,8 @@
+/* Base Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  /* height: 700px; */
   background-image: url(https://jobhunt.madrasthemes.com/wp-content/uploads/2018/09/home-bg.jpg);
   color: #ccc;
 }
@@ -22,7 +22,6 @@ h1 {
   font-size: 53px;
   color: white;
 }
-
 
 h2 {
   text-align: center;
@@ -81,15 +80,13 @@ input[type="submit"]:hover {
 .job-post {
   border: 1px solid #ccc;
   margin-top: 20px;
-  padding: 0px 15px;
+  padding: 15px;
   border-radius: 5px;
   background-color: #f9f9f9;
-  width: 90%;
+  width: 98%;
   color: #007bff;
-  margin-left: 52px;
   text-align: left;
   display: inline-block;
-  height: 315px;
 }
 
 .job-post p {
@@ -122,4 +119,84 @@ input[type="submit"]:hover {
   border-radius: 4px;
   padding: 8px 16px;
   cursor: not-allowed;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .list {
+    flex-direction: column;
+    margin-bottom: 150px;
+  }
+
+  input[type="text"],
+  select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .job-post {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+    margin-top: 150px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .list {
+    margin-bottom: 100px;
+  }
+
+  .job-post {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 30px;
+    margin-top: 100px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .list {
+    margin-bottom: 50px;
+  }
+
+  input[type="text"],
+  select,
+  .search {
+    padding: 10px;
+    margin-right: 0;
+  }
+
+  .job-post {
+    padding-left: 10px;
+    margin-left: -10px;
+
+  }
+
+  .apply-button,
+  .applied-button {
+    width: 100%;
+    /* padding: 10px; */
+  }
 }

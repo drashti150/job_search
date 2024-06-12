@@ -1,7 +1,6 @@
 <h1>Welcome to Recruiter Panel</h1>
-
 <div *ngIf="!isLoggedIn">
-
+<body>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="login">
 
@@ -23,8 +22,9 @@
     </div>
 
   </form>
-</div>
+</body>
 
+</div>
 <div *ngIf="isLoggedIn">
 
 <div class="container">
@@ -62,7 +62,7 @@
 
       <div class="categories">
 
-        <h1>Category wise Job List</h1>
+        <!-- <h1>Category wise Job List</h1> -->
 
         <div class="category-list">
 
@@ -91,7 +91,6 @@
 
           <div class="job-container">
             <h2>Id: {{job.id}}</h2>
-            <h2>Title : {{job.title}}</h2>
             <p>Category : {{job.category}}</p>
             <p>Country : {{job.country}}</p>
             <p>Company : {{job.company}}</p>
