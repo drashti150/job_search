@@ -4,14 +4,12 @@
     <p>Find Jobs, Employment & Career Opportunities</p>
 
     <div class="list">
-      <!-- <label for="country">Select Country:</label> -->
       <select id="country-list" [(ngModel)]="selectedCountry">
         <option value="all">All City</option>
         <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
       </select>
 
 
-      <!-- <label for="category">Select Category:</label> -->
       <select id="category-list" [(ngModel)]="selectedCategory">
         <option value="all">All Category</option>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
@@ -23,22 +21,16 @@
   </div>
 </body>
 
+
+<!-- joblist -->
 <div *ngIf="filteredJobPosts.length > 0">
 
   <h2> Job Posts</h2>
-  <!-- Display filtered job posts -->
-  <!-- <div class="job-post" *ngFor="let job of filteredJobPosts">
-    <p>Id: {{job.id}}</p>
-    <p>Category : {{job.category}}</p>
-    <p>Country : {{job.country}}</p>
-    <p>Company : {{job.company}}</p>
-    <p>Location : {{job.location}}</p>
-    <p>Description : {{job.description}}</p>
-    <button (click)="applyForJob(job)" [disabled]="job.applied">Apply</button>
-  </div> -->
-  <div class="container">
+
+  <div class="container-custom">
     <div class="row">
       <div class="col-md-8 offset-md-2">
+
         <div class="job-post" *ngFor="let job of filteredJobPosts">
           <p><strong>Id:</strong> {{job.id}}</p>
           <p><strong>Category:</strong> {{job.category}}</p>
@@ -48,10 +40,11 @@
           <p><strong>Description:</strong> {{job.description}}</p>
           <button class="btn btn-primary" (click)="applyForJob(job)" [disabled]="job.applied">Apply</button>
         </div>
+        
       </div>
     </div>
   </div>
-  
+
 </div>
 
 

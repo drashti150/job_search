@@ -17,7 +17,6 @@ body {
   padding: 20px;
   border-radius: 8px;
   position: absolute;
-  /* top: 50%; */
   left: 50%;
   border: 3px solid black;
   transform: translate(-50%, -50%);
@@ -65,7 +64,6 @@ button[type="submit"] {
   width: 100px;
   margin: 30px;
   height: 40px;
-  /* margin-left: 40px; */
 }
 
 button[type="submit"]:hover {
@@ -249,13 +247,13 @@ input {
   }
 
   .login {
-    width: 30%;
+    width: 35%;
     margin: 20px;
   }
 
   .right-panel {
     flex: 1;
-    margin-left: 20px;
+    margin: 0px 10px;
   }
 }
 
@@ -266,7 +264,6 @@ input {
 
   .login {
     width: 70%;
-    /* margin-top: 270px; */
   }
 
   input {

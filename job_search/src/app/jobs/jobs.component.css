@@ -1,5 +1,93 @@
-.job-list {
+/* Custom Styles */
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: rgba(216, 216, 216, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 36px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.job-item {
+  margin-bottom: 20px;
   list-style-type: none;
+
+}
+
+.job-container {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+}
+
+.job-container p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.apply-button {
+  margin: 10px;
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.apply-button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.applied-button {
+  margin-top: 10px;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container-custom {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .job-container {
+    padding: 10px;
+  }
+
+  .apply-button,
+  .applied-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px;
+    margin-top: 30px;
+  }
+
+  .job-container {
+    padding: 10px;
+  }
+
+  .apply-button,
+  .applied-button {
+    width: 45%;
+  }
+}
+.job-list {
   padding: 0;
 }
 

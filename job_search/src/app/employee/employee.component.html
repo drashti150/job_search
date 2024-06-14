@@ -1,39 +1,39 @@
 <h1>Welcome to Recruiter Panel</h1>
 <div *ngIf="!isLoggedIn">
-<body>
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <div class="login">
 
-      <h2>Login</h2>
+  <body>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="login">
 
-      <div>
-        <label for="username">Username : </label>
-        <input type="username" formControlName="username">
+        <h2>Login</h2>
+
+        <div>
+          <label for="username">Username : </label>
+          <input type="username" formControlName="username">
+        </div>
+
+        <div>
+          <label for="password">Password : </label>
+          <input type="password" formControlName="password">
+        </div>
+
+        <button type="submit">Login</button>
+
       </div>
 
-      <div>
-        <label for="password">Password : </label>
-        <input type="password" formControlName="password">
-      </div>
-
-      <button type="submit">Login</button>
-      <!-- <a href="#" class="forgot-password-link" (click)="changePassword()">Forgot Password?</a> -->
-
-    </div>
-
-  </form>
-</body>
+    </form>
+  </body>
 
 </div>
+
+
 <div *ngIf="isLoggedIn">
 
-<div class="container">
-
-  <div class="left-panel">
-
-    <h1>Recruiter Panel</h1>
+  <div class="container">
 
     <div class="left-panel">
+
+      <h1>Recruiter Panel</h1>
 
       <div class="category">
         <h2 (click)="toggleCategories()">Category List</h2>
@@ -43,122 +43,64 @@
         <h2 (click)="toggleJobList()">Job List</h2>
       </div>
 
-      <div class="user">
-        <h2 (click)="toggleUserList()">User List</h2>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="right-panel">
-
-    <div class="recruiter_box" *ngIf="showCategoriesPanel">
-
-      <h1>Add category </h1>
-
-      <input type="text" [(ngModel)]="newCategory" placeholder="Enter new category">
-      <button class="addrecruiter"  (click)="addCategory()" type="submit">Add</button>
-
-      <div class="categories">
-
-        <!-- <h1>Category wise Job List</h1> -->
-
-        <div class="category-list">
-
-          <h2 class="section-header">All categories</h2>
-          <select id="category-list" (change)="filterByCategory()">
-            <option value="all">All Categories</option>
-            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-          </select>
-
-        </div>
-
-      </div>
     </div>
 
 
+    <div class="right-panel">
 
-    <!-- </div> -->
+      <div class="recruiter_box" *ngIf="showCategoriesPanel">
 
-    <div class="recruiter_box" *ngIf="showJobList">
+        <h1>Add category </h1>
 
-      <h2>Job List</h2>
+        <input type="text" [(ngModel)]="newCategory" placeholder="Enter new category">
+        <button class="addrecruiter" (click)="addCategory()" type="submit">Add</button>
 
-      <ul class="job-list">
+        <div class="categories">
 
-        <li *ngFor="let job of jobPosts; let i = index">
+          <div class="category-list">
 
-          <div class="job-container">
-            <h2>Id: {{job.id}}</h2>
-            <p>Category : {{job.category}}</p>
-            <p>Country : {{job.country}}</p>
-            <p>Company : {{job.company}}</p>
-            <p>Location : {{job.location}}</p>
-            <p>Description : {{job.description}}</p>
+            <h2 class="section-header">All categories</h2>
+            <select id="category-list" (change)="filterByCategory()">
+              <option value="all">All Categories</option>
+              <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
 
-            <button (click)="deleteJob(i)">Delete</button>
           </div>
+        </div>
+      </div>
 
-        </li>
-      </ul>
+      <div class="recruiter_box" *ngIf="showJobList">
 
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" [(ngModel)]="newJob.title" required>
+        <h2>Job List</h2>
 
-      <label for="company">Company:</label>
-      <input type="text" id="company" name="company" [(ngModel)]="newJob.company" required>
+        <ul class="job-list">
 
-      <button type="submit" class="addjobpost" (click)="addJobPost()">Add Job Post</button>
+          <li *ngFor="let job of jobPosts; let i = index">
 
-    </div>
+            <div class="job-container">
+              <h2>Id: {{job.id}}</h2>
+              <p>Category : {{job.category}}</p>
+              <p>Country : {{job.country}}</p>
+              <p>Company : {{job.company}}</p>
+              <p>Location : {{job.location}}</p>
+              <p>Description : {{job.description}}</p>
 
+              <button (click)="deleteJob(i)">Delete</button>
+            </div>
+          </li>
+        </ul>
 
-    
-    <div class="recruiter_box" *ngIf="showUserList">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="newJob.title" required>
 
-      <h2>Job Applications for Job ID: {{ jobId }}</h2>
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" [(ngModel)]="newJob.company" required>
 
-      <ul>
-        <li *ngFor="let application of jobApplications; let i = index">
-          <p>User: {{ application.user }}</p>
-          <p>Resume: {{ application.resume }}</p>
-          <button (click)="deleteJobApplication(i)">Delete</button>
-        </li>
-      </ul>
+        <button type="submit" class="addjobpost" (click)="addJobPost()">Add Job Post</button>
 
-      <div *ngIf="jobApplications.length === 0">
-        <p>No job applications found.</p>
       </div>
 
     </div>
-
   </div>
-</div>
 
 </div>
-
-
-<!-- <div class="recruiter_box" *ngIf="showCategoriesPanel">
-<h1>Add category </h1>
-      <div class="categories">
-
-        <h1>Category wise Job List</h1>
-        <!-- </div> -->
-<!-- <div class="category-list">
-
-          <h2 class="section-header">All categories</h2>
-
-          <select id="category-list" (change)="filterByCategory()">
-            <option value="all">All Categories</option>
-            <option *ngFor="let category of categories" [value]="category"> {{ category }}</option>
-          </select>
-        </div>
-          <form (ngSubmit)="addCategory()">
-            <input type="text" [(ngModel)]="newCategory" placeholder="Enter new category">
-            <button type="submit">Add</button>
-        </form>
-        </div>
-
-      </div> -->
-<!-- </div> -->

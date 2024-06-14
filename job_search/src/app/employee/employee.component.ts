@@ -11,16 +11,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class EmployeeComponent {
   loginForm: any;
-  isLoggedIn: boolean = false ;
+  isLoggedIn: boolean = false;
 
-  constructor(private sweetAlertService: SweetalertService , private formBuilder: FormBuilder) {
-    
+  constructor(private sweetAlertService: SweetalertService, private formBuilder: FormBuilder) {
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
 
     });
-   }
+  }
 
   showCategoriesPanel: boolean = false;
   selectedJob: any;
@@ -46,6 +46,7 @@ export class EmployeeComponent {
   newCategory: string = '';
   newJob: any = {};
 
+
   ngOnInit(): void {
     this.jobPosts.forEach((job: { id: number; }) => {
       job.id = this.jobIdCounter++;
@@ -67,23 +68,23 @@ export class EmployeeComponent {
     this.retrieveData();
   }
 
-  
+
   login() {
     if (this.loginForm.valid) {
       const username = this.loginForm.value.username;
       const password = this.loginForm.value.password;
-  
+
       if (username.trim() === 'recruiter' && password.trim() === '1234') {
 
-        this.sweetAlertService.showSuccessAlert('Success..','Login Successfully.');
+        this.sweetAlertService.showSuccessAlert('Success..', 'Login Successfully.');
 
         this.isLoggedIn = true;
 
       } else {
 
-        this.sweetAlertService.showErrorAlert('Oops...','Invalid username or password.');
-       
-      }      
+        this.sweetAlertService.showErrorAlert('Oops...', 'Invalid username or password.');
+
+      }
       this.loginForm.reset();
     } else {
       this.loginForm.markAllAsTouched();
@@ -96,7 +97,6 @@ export class EmployeeComponent {
     localStorage.setItem('jobApplications', JSON.stringify(this.jobApplications));
 
   }
-
 
   deleteJobApplication(index: number) {
     this.jobApplications.splice(index, 1);

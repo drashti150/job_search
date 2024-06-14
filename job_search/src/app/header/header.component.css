@@ -21,7 +21,6 @@ header {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
 }
 
@@ -51,7 +50,6 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #ffd700;
-  /* Change color on hover */
 }
 
 /* Additional styles for fixed header */
@@ -76,7 +74,6 @@ nav ul li a:hover {
 .header-fixed .header-limiter nav {
   font: 20px Arial, Helvetica, sans-serif;
   line-height: 40px;
-  /* margin-right: 10px; */
 }
 
 .header-fixed .header-limiter nav a {
@@ -147,7 +144,8 @@ nav ul li a:hover {
 
   .header-limiter nav ul {
     flex-direction: row;
-    width: 100%;
+    width: 10%;
+    margin-top: 10px;
   }
 
   .header-limiter nav ul li {
@@ -156,10 +154,9 @@ nav ul li a:hover {
 
   .post-job-btn,
   .logout-btn {
-    width: 35%;
     text-align: center;
-    /* margin: 10px 0; */
-    display: inline-block;
+    margin: 0px 50px;
+    /* display: inline-block; */
 
   }
 }
@@ -171,7 +168,7 @@ nav ul li a:hover {
     padding: 28px 40px;
     height: 170px;
     color: #ffffff;
-   
+
   }
 
   .header-limiter h1 {

@@ -18,13 +18,15 @@ footer {
   padding: 0 20px;
 }
 
-.container > div {
+.container>div {
   flex: 1;
   min-width: 200px;
   margin: 10px 0;
 }
 
-h3, h1, h2 {
+h3,
+h1,
+h2 {
   color: #f4f4f4;
   font-size: large;
 }
@@ -35,14 +37,16 @@ a {
   text-decoration: none;
   margin: 15px 0;
   font-size: large;
-justify-content: space-around;
+  justify-content: space-around;
 }
 
 a:hover {
   color: white;
 }
 
-.footer-link h1, .footer-link h2, .footer-link p {
+.footer-link h1,
+.footer-link h2,
+.footer-link p {
   margin: 15px 0;
 }
 
@@ -66,7 +70,6 @@ a:hover {
   font-size: 16px;
   color: #ffffff;
   text-decoration: none;
-  /* border-top: 30px; */
 
 }
 
@@ -101,12 +104,12 @@ a:hover {
     flex-direction: column;
     align-items: center;
   }
-  
-  .container > div {
+
+  .container>div {
     max-width: 100%;
     text-align: center;
   }
-  
+
   .bottom-footer {
     padding-top: 20px;
   }

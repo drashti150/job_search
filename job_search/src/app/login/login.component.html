@@ -1,18 +1,19 @@
 <h1>Welcome to Login Page</h1>
+
 <body>
 
-<div class="container">
-  <div class="card">
-    <h2>Login</h2>
+  <div class="container">
+    <div class="card">
+      <h2>Login</h2>
 
-    <form (ngSubmit)="login()" [formGroup]="loginForm">
-      <input type="text" id="email" name="email" formControlName="email" placeholder="Email">
-      <input type="password" id="password" name="password" formControlName="password" placeholder="Password">
-      <button type="submit">Login</button>
-    </form>
+      <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <input type="text" id="email" name="email" formControlName="email" placeholder="Email">
+        <input type="password" id="password" name="password" formControlName="password" placeholder="Password">
+        <button type="submit">Login</button>
+      </form>
 
+    </div>
   </div>
-</div>
 
 </body>
 

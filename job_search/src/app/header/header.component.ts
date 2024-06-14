@@ -11,7 +11,7 @@ export class HeaderComponent {
   isLoggedIn: boolean | undefined;
   constructor(private router: Router) { }
 
-  
+
   logout() {
     // this.loginForm.reset();
     this.isLoggedIn = false;
