@@ -68,7 +68,7 @@ h1 {
 
   .apply-button,
   .applied-button {
-    width: 100%;
+    width: 20%;
   }
 }
 
@@ -87,6 +87,7 @@ h1 {
     width: 45%;
   }
 }
+
 .job-list {
   padding: 0;
 }
